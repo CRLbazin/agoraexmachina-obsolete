@@ -5,7 +5,7 @@ Présentation générale
 ------------------------
 AGORA EX MACHINA (AEM) est une plateforme WEB de démocratie liquide s'inspirant de la solution allemande Adhocracy.
 
-L'outil permet de créer des ateliers de travail organisés par thèmes, où chaque membre peut participer aux discussions et aux votes de propositions.
+L'outil permet de créer des `ateliers de travail` organisés par `thèmes`, où chaque membre peut participer aux discussions et aux `votes` de propositions.
 
 Les propositions ayant recueilli le plus de voix sont validées à l'issu de l'atelier.
 
@@ -26,7 +26,7 @@ Outils utilisés
 *********************
 * Bootstrap
 * Jquery
-* Frameworks `CUP <https://github.com/CRLbazin/cup_mvc>`_
+* Frameworks CUP <https://github.com/CRLbazin/cup_mvc>
 
 
 
