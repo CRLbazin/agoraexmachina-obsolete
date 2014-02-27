@@ -18,7 +18,7 @@ Languages utilisés
 *********************
 * PHP 5
 * HTML
-* CSS
+* CSS 3
 * Javascript
 
 
@@ -26,12 +26,11 @@ Outils utilisés
 *********************
 * Bootstrap
 * Jquery
-* Frameworks PHP MVC cup
+* Frameworks `CUP <https://github.com/CRLbazin/cup_mvc>`_
+
 
 
 
 Installation
 -----------------
 Lire le fichier INSTALL.md
-
-
