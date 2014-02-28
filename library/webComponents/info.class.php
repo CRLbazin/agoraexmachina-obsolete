@@ -1,0 +1,1 @@
+<?phpnamespace library\webComponents;/*** text info web component* @author cyril bazin* @package cu.core* @version 1.0*/class info extends \library\field{	public function build()	{		$widget = '';				if(!empty($this->data))			$widget .= '			<div class="alert alert-info" style="width:90%;">				'.$this->data.'			</div>';						return $widget;	}}?>

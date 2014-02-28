@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<translations>
+	<translate var="_TR_NoRouteSpecified" value="Aucune route spécifiée" />
+	<translate var="_TR_PageNotFound" value="Page non trouvée" />
+	<translate var="_TR_404Description" value="Désolé mais la page demandée n'existe pas ou n'existe plus." />
+	<translate var="_TR_Technical" value="Technique" />
+	<translate var="_TR_TechnicalError" value="Error technique" />
+	<translate var="_TR_TechnicalAlert" value="Cette partie est réservée aux développeurs" />
+	<translate var="_TR_InProgess" value="En cours" />
+	<translate var="_TR_Finished" value="Terminé" />
+	<translate var="_TR_Canceled" value="Annulé" />
+	<translate var="_TR_Proposed" value="Proposé" />
+	<translate var="_TR_Valided" value="Validé" />
+	<translate var="_TR_no" value="Non" />
+	<translate var="_TR_yes" value="Oui" />
+	<translate var="_TR_Home" value="Accueil" />
+	<translate var="_TR_Users" value="Utilisateurs" />
+	<translate var="_TR_Subscribe" value="Créer un compte" />
+	<translate var="_TR_Register" value="Se connecter" />
+	<translate var="_TR_Warning" value="Attention" />
+	<translate var="_TR_wrongPassword" value="Mot de passe incorrect" />
+	<translate var="_TR_Hello" value="Bonjour" />
+	<translate var="_TR_Private" value="Privé" />
+	<translate var="_TR_Logout" value="Se déconnecter" />
+	<translate var="_TR_YouAreProperlyDisconnected" value="Vous êtes correctement déconnecté" />
+	<translate var="_TR_UserCreateSuccessfully" value="Utilisateur créé avec succès." />
+	<translate var="_TR_Admin" value="Administration" />
+	<translate var="_TR_PrivateSpace" value="Espace privé" />
+	<translate var="_TR_PleaseLogin" value="Veuillez vous connecter" />
+	<translate var="_TR_NoView" value="La vue spécifiée n'existe pas" />
+	<translate var="_TR_Header" value="Entête" />
+	<translate var="_TR_ActionDoesntExist" value="L'action n'existe pas" />
+	<translate var="_TR_Name" value="Nom" />
+	<translate var="_TR_Status" value="Statut" />
+	<translate var="_TR_Active" value="Actif" />
+	<translate var="_TR_Edit" value="Editer" />
+	<translate var="_TR_mustValidateCharter" value="Vous devez accepter la charte des utilisateurs" />
+	<translate var="_TR_SIntroduction" value="Introduction courte" />
+	<translate var="_TR_Introduction" value="Introduction" />
+	<translate var="_TR_Content" value="Contenu" />
+	<translate var="_TR_Image" value="Image" />
+	<translate var="_TR_Highlight" value="Mis en avant" />
+	<translate var="_TR_Code" value="Code" />
+	<translate var="_TR_Email" value="Adresse mail" />
+	<translate var="_TR_Password" value="Mot de passe" />
+	<translate var="_TR_Level" value="Accréditations" />
+	<translate var="_TR_Id" value="Id" />
+	<translate var="_TR_Charter" value="Charte des utilisateurs" />
+	<translate var="_TR_Public" value="Publique" />
+	<translate var="_TR_Array" value="Tableau" />
+	<translate var="_TR_Fullscreen" value="Plein ecran" />
+	<translate var="_TR_Delete" value="Supprimer" />
+	<translate var="_TR_Pages" value="Pages" />
+	<translate var="_TR_NotNull" value="Ne doit pas être vide" />
+	<translate var="_TR_EmailFormat" value="Doit être au format d'un email" />
+	<translate var="_TR_PasswordFormat" value="Format du mot de passe" />
+	<translate var="_TR_CreationDate" value="Date de création" />
+	<translate var="_TR_InstancesAddSuccessfully" value="Atelier ajouté avec succès" />
+	<translate var="_TR_Categories" value="Thèmes" />
+	<translate var="_TR_Descr" value="Description" />
+	<translate var="_TR_Date" value="Date" />
+	<translate var="_TR_NoData" value="Aucune donnée pour l'instant." />
+	<translate var="_TR_Administration" value="Administration" />
+	<translate var="_TR_CategoriesList" value="Liste des thèmes" />
+	<translate var="_TR_AddAnInstance" value="Créer un nouvel atelier" />
+	<translate var="_TR_AddACategories" value="Ajouter un thème" />
+	<translate var="_TR_EditACategories" value="Editer un thème" />
+	<translate var="_TR_AdminCategories" value="Administration des thèmes" />
+	<translate var="_TR_listInstanceWithTheme" value="Liste des ateliers liés au thème" />
+	<translate var="_TR_Deadline" value="Date de fin" />
+	<translate var="_TR_Help" value="Aide" />
+	<translate var="_TR_InstancesHelp" value="Un atelier réunit des utilisateurs autour d'un sujet pour débattre et soumettre des votes." />
+	<translate var="_TR_InstancesListHelp" value="Cette page affiche la liste thématique des ateliers." />
+	<translate var="_TR_AddAnUser" value="Ajouter un utilisateur" />
+	<translate var="_TR_adminUsers" value="Administration des utilisateurs" />
+	<translate var="_TR_EditUser" value="Editer un utilisateur" />
+	<translate var="_TR_Actions" value="Actions" />
+	<translate var="_TR_EditInstance" value="Editer l'atelier" />
+	<translate var="_TR_InstancesDisplayHelp" value="Cette page affiche le contenu d'un atelier.[br][br]C'est ici que vous participez aux votes et aux débats entre les membres." />
+	<translate var="_TR_Votes" value="Votes" />
+	<translate var="_TR_Forum" value="Forum" />
+	<translate var="_TR_Desc" value="Description" />
+	<translate var="_TR_DeleteInstance" value="Supprimer l'atelier" />
+	<translate var="_TR_AddVotes" value="Ajouter une proposition" />
+	<translate var="_TR_MustConnected" value="Vous devez être connecter" />
+	<translate var="_TR_elementsDeleted" value="Eléments supprimés avec succès." />
+	</translations>
