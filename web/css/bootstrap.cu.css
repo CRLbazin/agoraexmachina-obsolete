@@ -1053,7 +1053,7 @@
   background-size: 40px 40px !important;
 }
 .ribbed-grayLight {
-  background-color: #999999 !important;
+  background-color: #AEAEAE !important;
   background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent) !important;
   background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent) !important;
   background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent) !important;
@@ -1703,11 +1703,12 @@ h1 {
 }
  .listview-outlook .list .list-content .list-subtitle,
  .listview-outlook .list .list-content .list-remark {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: normal;
   line-height: 1.428571429;
   color: #606060;
   padding : 20px 20px 0px 20px;
+  text-align : justify;
 }
  .listview-outlook .list .list-content .list-subtitle {
   font-weight: bold;
@@ -1818,6 +1819,13 @@ select[readonly],
 textarea[readonly] {
   cursor: not-allowed;
   background-color: #eeeeee;
+}
+
+textarea
+{
+	width : 100%;
+	color : #333333;
+	padding : 10px;
 }
 
 
@@ -2250,15 +2258,15 @@ textarea[readonly] {
   position: relative;
 }
 .tile-group.two,
-.tile-group.double {
+.shortcut.double {
   width: 260px;
 }
 .tile-group.three,
-.tile-group.triple {
-  width: 390px;
+.shortcut.triple {
+  width: 300px;
 }
 .tile-group.four,
-.tile-group.quadro {
+.shortcut.quadro {
   width: 520px;
 }
 .tile-group.five {
@@ -2680,24 +2688,31 @@ blockquote {
 }
 
 
-.modal2
-{
-	z-index : 99999;
-	width : 1024px;
-	margin-left : auto;
-	margin-right:auto;
-	text-align : left;
-	padding : 10px;
-	background-color : #FFF;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
-	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+body
+{ 
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	-webkit-font-smoothing : antialiased;
+	color : #333333;
+	font-size : 13px;
 }
 
-.modal
-{	
-	padding-top : 75px;
-	
+
+
+.modal2, .modal-content
+{
+	padding : 20px;	
+}
+
+
+.btn
+{
+	white-space: normal;
+	text-align : left;
+}
+
+
+.alert, .btn, .modal-content
+{
+  border-radius: 0px;
 }
 

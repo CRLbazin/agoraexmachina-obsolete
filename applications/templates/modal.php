@@ -1,1 +1,1 @@
-<!-- Button trigger modal 	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">AZE</button>	-->	<!-- Modal -->		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">	 	</div><!-- /.modal -->		
+<div id="myModal" style="left : -200px;" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >	<div class="modal-dialog">		<div class="modal-content" style="width : 850px;"></div>	</div></div>

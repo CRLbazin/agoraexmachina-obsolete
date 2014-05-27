@@ -45,7 +45,8 @@ V0.6 #Silent Syren
 
 V0.7 #Septentryon LTS
 -----------------------
-*1ère version bénéficiant d'un support à long terme (LTS). Les précédentes versions d'AGORA Ex Machina ne sont plus maintenues et sont devenus obsolètes. Un script de migration de données est disponible sur demande*
+* 1ére version bénéficiant d'un support é ton terme (LTS). 
+* Les précédentes versions d'AGORA Ex Machina ne sont plus maintenues et sont devenus obsolétes. Un script de migration de données est disponible sur demande
 
 Migration ergonomique
 ***********************
@@ -55,7 +56,15 @@ Migration ergonomique
 Migration complète de l'architecture logicielle
 ****************************************************
 * Suppression de Symfony2
-* Migration vers le Framework Cup (https://github.com/CRLbazin/cup)
+* Migration vers le Framework CUP (https://github.com/CRLbazin/cup)
+
+
+V0.7.1 #Seerawyer
+---------------------
+* Fin de la migration vers CUP
+* Fin du développement des modules catégories, instances, votes et forums
+* Correction des bugs remontés par Seeraiwer
+
 
 
 

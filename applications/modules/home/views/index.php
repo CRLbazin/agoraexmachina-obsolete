@@ -1,3 +1,4 @@
+<div class="container">
 <h1><?php echo _TR_CategoriesList ?></h1>
 <hr/>
 
@@ -13,4 +14,4 @@ foreach($categories as $category)
 	<?php
 }
 ?>
-
+</div>

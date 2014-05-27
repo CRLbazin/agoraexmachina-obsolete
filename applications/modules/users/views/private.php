@@ -1,1 +1,1 @@
-<h1><?php echo _TR_Users ?></h1><hr /><?phpif(isset($form))	echo $form;
+<h1><?php echo _TR_Users ?></h1><hr /><?phpif(isset($form))	echo $form;?>

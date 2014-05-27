@@ -9,15 +9,14 @@ namespace library;
 
 /**
 * base entity
-* @version 1.1
 * @author cyril bazin <crlbazin@gmail.com>
 */
 abstract class baseEntity 
 {
 	/**
-	* constructor of the base entity class
-	* call hydration method
-	* @param object object used to hydrate the entity
+	* constructor of the base entity class. Call hydration method
+	* @param array list of objects used to hydrate the entity
+	* @return void
 	*/
 	public function __construct(array $values = array())
 	{
@@ -27,10 +26,12 @@ abstract class baseEntity
 	
 	/**
 	* hydrate the entity
-	* @param object object used to hydrate the entity
+	* @param array list of objects used to hydrate the entity
+	* @return void
 	*/
 	public function hydrate($values)
 	{
+	    if(isset($values))
 		foreach($values as $attr => $val)
 		{
 			$method = 'set'.ucfirst($attr);

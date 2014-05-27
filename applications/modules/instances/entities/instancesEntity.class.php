@@ -10,9 +10,8 @@ namespace applications\modules\instances\entities;
 
 /**
 * instances entities
-* @version 1.0
 */
-class instancesEntity extends \library\baseEntity
+class instancesEntity extends \library\baseEntity implements \applications\modules\instances\interfaces\IInstancesEntity
 {
 	protected 
 		$id,

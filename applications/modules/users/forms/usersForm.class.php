@@ -22,6 +22,13 @@ class usersForm extends \library\baseFormBuilder
 	{
 		$this->form->add(new \library\webComponents\text(
 			array(
+				'title' 	=> _TR_Id,
+				'name' 		=> 'id',
+				'readonly'	=> 'readonly',
+				'value' 	=>  $this->form->getEntity()->getId(),
+			)));
+		$this->form->add(new \library\webComponents\text(
+			array(
 				'title' => _TR_Name,
 				'name' => 'name',
 				'value' =>  $this->form->getEntity()->getName(),
@@ -63,6 +70,13 @@ class usersForm extends \library\baseFormBuilder
 				'validators'	=> array(
 					new \library\validators\notNullValidator("<b>"._TR_Level.'</b> : '._TR_NotNull),
 				)
+			)));
+		$this->form->add(new \library\webComponents\text(
+			array(
+				'title' => _TR_CreationDate,
+				'name' => 'Date de creation',
+				'value' =>  $this->form->getEntity()->getCreationDate(),
+					'readonly'	=> 'readonly',
 			)));
 	}
 	

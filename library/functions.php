@@ -4,12 +4,12 @@
 * @package cu.functions
 * @copyright GNU GPL
 * @filesource
-* @version 1.1
 * @author cyril bazin
 */
 
 /**
 * automatic load function of classes
+* @return void
 */
 function autoload($class)
 {
@@ -27,14 +27,14 @@ spl_autoload_register('autoload');
 */
 function encodeHtmlString($string)
 {
-	$string = str_replace("é", "&eacute;", $string);
-	$string = str_replace("è", "&egrave;", $string);
-	$string = str_replace("à", "&agrave;", $string);
-	$string = str_replace("ù", "&ugrave;", $string);
-	$string = str_replace("ô", "&ocirc;", $string);
-	$string = str_replace("î", "&icirc;", $string);
-	$string = str_replace("ê", "&ecirc;", $string);	
-	$string = str_replace("'", "&#39;", $string);	
+	$string = str_replace("�", "&eacute;", $string);
+	$string = str_replace("�", "&egrave;", $string);
+	$string = str_replace("�", "&agrave;", $string);
+	$string = str_replace("�", "&ugrave;", $string);
+	$string = str_replace("��", "&ocirc;", $string);
+	$string = str_replace("�", "&icirc;", $string);
+	$string = str_replace("�", "&ecirc;", $string);	
+	$string = str_replace("'", "'", $string);	
 	$string = str_replace("\\", "/", $string);	
 	
 	return $string;
@@ -47,7 +47,9 @@ function encodeHtmlString($string)
 */
 function secureString($string)
 {
-	$string = str_replace("'", "\'", $string);
+	/**
+	$string = str_replace("'", "", $string);
+	*/	
 	
 	return $string;
 }
@@ -208,9 +210,9 @@ function convertCodes($code)
 function msgError($msg)
 {
 	return  
-		"<div class='alert alert-danger'>
+		"<div class='alert alert-danger shadow'>
 			<button type='button' class='close' data-dismiss='alert'>&times;</button>
-			<strong>". strtoupper(_TR_Warning) ." ! </strong> ". $msg ."
+			<strong><u>". strtoupper(_TR_Warning) ." </u>&nbsp;</strong> ". $msg ."
 		</div> <!-- /alert -->";
 }
 
@@ -222,9 +224,9 @@ function msgError($msg)
 function msgSuccess($msg)
 {
 	return  
-		"<div class='alert alert-success'>
+		"<div class='alert alert-success shadow'>
 			<button type='button' class='close' data-dismiss='alert'>&times;</button>
-			<strong>". strtoupper("Information") ." ! </strong> ". $msg ."
+			<strong><u>". strtoupper("Information") ." </u>&nbsp;</strong> ". $msg ."
 		</div> <!-- /alert -->";
 }
 
@@ -236,11 +238,44 @@ function msgSuccess($msg)
 function msgAlert($msg)
 {
 	return  
-		"<div class='alert alert-info'>
+		"<div class='alert alert-info shadow'>
 			<button type='button' class='close' data-dismiss='alert'>&times;</button>
-			<strong>". strtoupper("Information") ." ! </strong> ". $msg ."
+			<strong><u>". strtoupper("Information") ." </u>&nbsp;</strong> ". $msg ."
 		</div> <!-- /alert -->";
 }
+
+
+/**
+* send an email
+*/
+function sendEmail($dest, $subject, $msg)
+{
+	$headers = "From: \"".WEBSITE_TITLE."\"<".WEBSITE_EMAIL.">\n";
+	$headers .= "Reply-To: ".WEBSITE_EMAIL."\n";
+	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"";
+	return @mail($dest,$subject,$msg,$headers);
+}
+
+
+
+function displayHeadband($img, $title, $msg)
+{
+	return $res = '
+	<div id="myCarousel" class="carousel slide shadow" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="item active" style="height:150px;overflow-y:hidden;">
+				<img src="'.$img.'" >
+				<div >
+					<div class="carousel-caption" style="padding-bottom : 0px;">
+						<h1 class="heroes">'.$title.'</h1>
+						<p>'.$msg.'&nbsp;</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>';
+}
+
 
 
 ?>

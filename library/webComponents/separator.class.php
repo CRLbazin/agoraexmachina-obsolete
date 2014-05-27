@@ -6,7 +6,6 @@ namespace library\webComponents;
 * separator web component
 * @author cyril bazin
 * @package cu.core
-* @version 1.0
 */
 class separator extends \library\field
 {

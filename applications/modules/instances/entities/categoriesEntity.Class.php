@@ -10,7 +10,6 @@ namespace applications\modules\instances\entities;
 
 /**
 * categories entities
-* @version 1.1
 */
 class categoriesEntity extends \library\baseEntity
 {

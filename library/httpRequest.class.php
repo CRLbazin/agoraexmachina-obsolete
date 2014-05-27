@@ -1,6 +1,6 @@
 <?php
 /**
-* file for the httpRequest class
+* file for the HTTP request class
 * @package cu.core
 * @copyright GNU GPL
 * @filesource
@@ -8,15 +8,32 @@
 namespace library;
 
 /**
-* http request manager class
-* @version 1.1
+* HTTP request manager class
 * @author cyril bazin <crlbazin@gmail.com>
 */
 class httpRequest
 {
+	
 	/**
-	* get URL
-	* @return string URI
+	* check if data is posted
+	* @return boolean
+	*/
+	public function isPosted()
+	{
+		if(!empty($_POST))
+			return true;
+		else
+			return false;
+	}
+	
+	public function getPOST()
+	{
+		return $_POST;
+	}
+	
+	/**
+	* get current URI
+	* @return string current URI
 	*/
 	public function requestUrl()
 	{
@@ -42,7 +59,8 @@ class httpRequest
 	{
 		return isset($_GET[$key]) ? $_GET[$key] : null;
 	}
-
+	
+	
 }
 
 ?>

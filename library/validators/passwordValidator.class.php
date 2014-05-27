@@ -10,6 +10,13 @@ namespace library\validators;
 */
 class passwordValidator extends \library\baseValidator
 {
+	
+	public function setErrorMsg()
+	{
+		$this->errorMsg = _TR_PasswordFormat;
+	}
+	
+	
 
 	public function isValid($value)
 	{
@@ -17,9 +24,9 @@ class passwordValidator extends \library\baseValidator
 		$lowercase = preg_match('@[a-z]@', $value);
 		$number    = preg_match('@[0-9]@', $value);
 		
-		if(!$uppercase || !$lowercase || !$number || strlen($value) < 9) 
-			return false;
-		else
+		//if(!$uppercase || !$lowercase || !$number || strlen($value) < 9) 
+		//	return false;
+		//else
 			return true;
 		
 	}

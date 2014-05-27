@@ -22,6 +22,23 @@ class usersManager extends \library\baseManager
 		//define name of the module
 		$this->module = 'users';
 	}	
+	
+	
+	/**
+	 * delete
+	 * execute a query "delete" with a filter on id
+	 * @param int id of the row to deleted
+	 */
+	public function delete($values)
+	{
+		if(is_array($values))
+		foreach($values as $key=>$value)
+			$this->db->exec("DELETE FROM users WHERE ".$key ." = '".$value."'");
+		else
+			$this->db->exec("DELETE FROM users WHERE id = '".$values."'");
+			
+	}
+	
 
 	/**
 	* add a user
@@ -36,13 +53,27 @@ class usersManager extends \library\baseManager
 			$sql = "UPDATE users ";
 		
 		$sql .= "
-			SET 
-				name 			= :name,
-				password 		= :password,
-				email			= :email,
-				active			= :active,
-				level			= :level,
-				creationDate	= :creationDate";
+		SET ";
+		
+		if($users->getName() <> "")
+			$sql .= "name 			= :name";
+		
+		if($users->getPassword() <> "")
+			$sql .= ", password 		= :password";
+		
+		if($users->getEmail() <> "")
+			$sql .= ", email			= :email";
+		
+
+		if($users->getActive() <> "")
+			$sql .= ", active			= :active";
+
+		if($users->getLevel() <> "")
+			$sql .= ", level			= :level";
+		
+		if($users->getCreationDate() <> "")
+			$sql .= ", creationDate			= :creationDate";
+		
 				
 		if($users->getId() != "")
 			$sql .= " WHERE id = :id ";
@@ -53,16 +84,28 @@ class usersManager extends \library\baseManager
 			$req->bindValue(':id', $users->getId());
 				
 	
+		if($users->getName() <> "")
+			$req->bindValue(':name', $users->getName());
 		
-		$req->bindValue(':name', $users->getName());
-		$req->bindValue(':password', $users->getPassword());
-		$req->bindValue(':email', $users->getEmail());
-		$req->bindValue(':active', $users->getActive());
-		$req->bindValue(':level', $users->getLevel());
-		$req->bindValue(':creationDate', date('d/m/Y'));
+		if($users->getPassword() <> "")
+			$req->bindValue(':password', $users->getPassword());
+		
+		if($users->getEmail() <> "")
+			$req->bindValue(':email', $users->getEmail());
+		
+		if($users->getActive() <> "")
+			$req->bindValue(':active', $users->getActive());
+		
+		if($users->getLevel() <> "")
+			$req->bindValue(':level', $users->getLevel());
+		
+
+		if($users->getCreationDate() <> "")
+			$req->bindValue(':creationDate', $users->getCreationDate());
+		
 
 		if(!$req->execute())
-			echo $req->errorInfo()[2];
+			return false;
 		else
 			return true;
 	}
@@ -80,6 +123,23 @@ class usersManager extends \library\baseManager
 		$req = $this->db->query("SELECT id, name, email, level FROM users WHERE email = '".$email."' AND password = '".$password."' and active = 1");
 		$res = $req->fetchAll(\PDO::FETCH_OBJ);
 		if(sizeof($res) == 1) 
+			return $res ;
+		else
+			return false;
+	}
+	
+
+	/**
+	 * get a user by an email
+	 * @param string email of the user
+	 * @return mixed
+	 */
+	public function getByEmail($email)
+	{
+		$req = $this->db->query("SELECT id, name, password, email, level FROM users WHERE email = '".secureString($email)."'");
+		$res = $req->fetchAll(\PDO::FETCH_OBJ);
+	
+		if(sizeof($res) >= 1)
 			return $res ;
 		else
 			return false;

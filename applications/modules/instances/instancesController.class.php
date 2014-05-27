@@ -10,117 +10,75 @@ namespace applications\modules\instances;
 
 /**
 * instances controller
-* @version 1.0
 */
-class instancesController extends \library\baseController //implements \library\interfaces\iCrud
+class instancesController extends \library\baseController
 {
 
+	/**
+	* index page 
+	* @param \library\httpRequest $request
+	* @return void
+	*/
 	public function indexAction(\library\httpRequest $request)
-	{
-		//data processing
-		if(isset($_POST))
-		{
-			if($request->getData('form_entity') == 'applications\modules\instances\entities\instancesEntity')
-			{
-				$instancesController = new \applications\modules\instances\instancesController($this->application, "instances", "add");
-				$instancesController->addAction($request);
-			}
-		}
-	
+	{		
 		$categoriesManager = $this->baseManager->getManagerOf('instances\categories');
-		$this->page->addVar('categories', $categoriesManager->getById($request->getGET('categories')));
+		$this->page->addVar('categories', $categoriesManager->getById($request->getGET('id')));
 		
-		$this->page->addVar('instances', $this->currentManager->getByCategories($request->getGET('categories')));
+		$this->page->addVar('instances', $this->currentManager->getByCategories($request->getGET('id')));
 	}
 	
-	
+	/**
+	* add an instance 
+	* @param \library\httpRequest $request
+	* @return void
+	*/
 	public function addAction(\library\httpRequest $request)
-	{
-		
+	{	
 		$this->page->setLayout('modal');
-	
-		if(isset($_SESSION['users']))
-		{
-			// $_POST processing
-			if(!empty($_POST))
-				$this->currentEntity->hydrate(array
-				(
-					'name'			=> $request->getData('name'),
-					'descr'			=> $request->getData('descr'),
-					'image'			=> $request->getData('image'),
-					'deadline'		=> $request->getData('deadline'),
-					'users'			=> $_SESSION['users']->id,
-					'categories'	=> $request->getGET('categories'),
-				));
+		
+		//complete currentEntity
+		$this->currentEntity->setCategories($request->getGET('categories'));
+		$this->currentEntity->setUsers($_SESSION['users']->id);
+		$this->currentEntity->setImage('logoInstance.jpg');
+		
+		
+		// create form
+		$formBuilder = new \applications\modules\instances\forms\instancesForm($this->currentEntity);
+		$formBuilder->build();
+		$form = $formBuilder->getForm();
+		if($request->isPosted() && $form->isValid())
+			if($this->currentService->add($this->currentEntity))
+				$this->page->addVar('msgSuccess', _TR_InstancesAddSuccessfully);
 			
-				
-			// create form
-			$formBuilder = new \applications\modules\instances\forms\instancesForm($this->currentEntity);
-			$formBuilder->build();
-			$form = $formBuilder->getForm();
-			
-			
-			//posted and valid
-			if(!empty($_POST) && $form->isValid())
-			{
-				
-				// upload image
-				if(!empty($_POST))
-					if(isset($_FILES))
-						if($_FILES['image']['name'] != "")
-						{
-							uploadFile($_FILES['image'], $_SERVER['DOCUMENT_ROOT']. WEBSITE_ROOT.'/images/', $_FILES['image']['name']);
-							$this->currentEntity->setImage( $_FILES['image']['name']);
-						}
-			
-				$this->baseManager->getManagerOf('instances')->save($this->currentEntity);	
-				$this->page->addVar('msgSuccess', _TR_InstancesAddSuccessfully);	
-			}
-			//posted and invalid
-			else if(!empty($_POST) && !$form->isValid())
-			{
-				$this->page->addVar('msgError', $form->displayErrorMsg());
-				$this->page->addVar('form', $form->createView());
-			}
-			//not posted
-			else
-				$this->page->addVar('form', $form->createView());
-		}
+		$this->page->addVar('form', $form->createView());
+		
+		
 		
 	}
 	
 	
+	/**
+	* display an instance
+	* @param \library\httpRequest $request
+	* @return void
+	*/
 	public function displayAction(\library\httpRequest $request)
 	{
-		//POST event
-		if(isset($_POST))
-		{
-			//add votes
-			if($request->getData('form_entity') == 'applications\modules\instances\entities\votesEntity')
-			{
-				$votesController = new \applications\modules\instances\votesController($this->application, "instances\votes", "add");
-				$votesController->addAction($request);
-			}
-			//edit instances
-			else if($request->getData('form_entity') == 'applications\modules\instances\entities\instancesEntity')
-			{
-				$instancesController = new \applications\modules\instances\instancesController($this->application, "instances", "edit");
-				$instancesController->editAction($request);
-			}
-		}
+		//init
+		$currentUser = isset($_SESSION['users']) ? $_SESSION['users']->id : 0;
 		
-		
-		//get instances
-		$instances = $this->currentManager->getById($request->getGET('instances'));
-		
-		
-		//get categories and votes
+		//get categories and votes		
 		$categories = $this->baseManager->getManagerOf('instances\categories')->getById($request->getGET('categories'));
-		$votes = $this->baseManager->getManagerOf('instances\votes')->getByInstances($request->getGET('instances'));
+		$votes = $this->baseManager->getManagerOf('instances\votes')->getByInstances($request->getGET('id'), $currentUser);
+		$forumsManager = $this->baseManager->getManagerOf('instances\forums');
+		$forums = $forumsManager->getByInstances($request->getGET('id'));
+		$forumsanswers = $forumsManager->getByInstancesWithAnswers($request->getGET('id'));
 		
-		$this->page->addVar('instances', $instances);
+		$this->page->addVar('instances', $this->currentEntity);
 		$this->page->addVar('categories', $categories);
 		$this->page->addVar('votes', $votes);
+		$this->page->addVar('forums', $forums);
+		$this->page->addVar('forumsanswers', $forumsanswers);
 		
 		
 	}
@@ -128,58 +86,18 @@ class instancesController extends \library\baseController //implements \library\
 	public function editAction(\library\httpRequest $request)
 	{
 		$this->page->setLayout('modal');
+
+
+		// create form
+		$formBuilder = new \applications\modules\instances\forms\instancesForm($this->currentEntity);
+		$formBuilder->build();
+		$form = $formBuilder->getForm();
+		if($request->isPosted() && $form->isValid())
+		if($this->currentService->add($this->currentEntity))
+			$this->page->addVar('msgSuccess', _TR_InstancesUpdatedSuccessfully);
+			
+		$this->page->addVar('form', $form->createView());
 		
-		$entity = $this->currentManager->getById($request->getGET('instances'));
-		$this->currentEntity->hydrate($entity[0]);
-		
-		
-		if(isset($_SESSION['users']))
-		{
-			// $_POST processing
-			if(!empty($_POST))
-				$this->currentEntity->hydrate(array
-				(
-					'name'			=> $request->getData('name'),
-					'descr'			=> $request->getData('descr'),
-					'image'			=> $request->getData('image'),
-					'deadline'		=> $request->getData('deadline'),
-					'users'			=> $_SESSION['users']->id,
-					'categories'	=> $request->getGET('categories'),
-				));
-			
-				
-			// create form
-			$formBuilder = new \applications\modules\instances\forms\instancesForm($this->currentEntity);
-			$formBuilder->build();
-			$form = $formBuilder->getForm();
-			
-			
-			//posted and valid
-			if(!empty($_POST) && $form->isValid())
-			{
-				
-				// upload image
-				if(!empty($_POST))
-					if(isset($_FILES))
-						if($_FILES['image']['name'] != "")
-						{
-							uploadFile($_FILES['image'], $_SERVER['DOCUMENT_ROOT']. WEBSITE_ROOT.'/images/', $_FILES['image']['name']);
-							$this->currentEntity->setImage( $_FILES['image']['name']);
-						}
-			
-				$this->baseManager->getManagerOf('instances')->save($this->currentEntity);	
-				$this->page->addVar('msgSuccess', _TR_InstancesAddSuccessfully);	
-			}
-			//posted and invalid
-			else if(!empty($_POST) && !$form->isValid())
-			{
-				$this->page->addVar('msgError', $form->displayErrorMsg());
-				$this->page->addVar('form', $form->createView());
-			}
-			//not posted
-			else
-				$this->page->addVar('form', $form->createView());
-		}
 	}
 	
 	

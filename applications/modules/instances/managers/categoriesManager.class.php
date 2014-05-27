@@ -12,7 +12,6 @@ use applications\modules\instances\entities;
 
 /**
 * categories manager
-* @version 1.0
 */
 class categoriesManager extends \library\baseManager
 {
@@ -23,10 +22,27 @@ class categoriesManager extends \library\baseManager
 		//define name of the module
 		$this->module = 'categories' ;
 	}
+	
+	/**
+	 * delete
+	 * @param array|int id(s) of the row to deleted
+	 * @return void
+	 */
+	public function delete($values)
+	{
+		if(is_array($values))
+			foreach($values as $key=>$value)
+				$this->db->exec("DELETE FROM categories WHERE ".$key ." = '".$value."'");
+		else
+			$this->db->exec("DELETE FROM categories WHERE id = '".$values."'");
+			
+	}
+	
 
 	/**
-	* add or update a categories
-	* @param entity categories
+	* add or update categories
+	* @param \applications\modules\instances\entities\categoriesEntity $categories
+	* @return boolean
 	*/
 	public function save(\applications\modules\instances\entities\categoriesEntity $categories )
 	{
@@ -50,12 +66,14 @@ class categoriesManager extends \library\baseManager
 
 		$req->bindValue(":name", $categories->getName());
 		
-		if(!$req->execute())
-			echo $req->errorInfo()[2];
-		else
-			return true ;
+		return $req->execute() ? true : false;
 	}
 	
+	
+	/**
+	* get all categories with count of instances
+	* @return array containing all of the result set rows 
+	*/
 	public function getAllWithInstancesCount()
 	{
 		$sql = "
@@ -76,6 +94,7 @@ class categoriesManager extends \library\baseManager
 		
 		return $req->fetchAll(\PDO::FETCH_OBJ);;
 	}
+	
 }
 
 ?>

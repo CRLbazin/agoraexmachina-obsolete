@@ -10,13 +10,14 @@ namespace applications\modules\images;
 
 /**
 * images controller
-* @version 1.1
 */
 class imagesController extends \library\baseController
 {
 
 	/**
 	* display an image
+	* @param \library\httpRequest $request
+	* return void
 	*/
 	public function displayAction(\library\httpRequest $request)
 	{

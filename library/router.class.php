@@ -1,103 +1,104 @@
 <?php
 /**
-* file for the router class
+* file for the router class.
 * @author cyril bazin <crlbazin@gmail.com>
 * @package cu.core
-* @copyright GNU GPL
+* @license GNU GPL
 * @filesource
 */
 namespace library;
 
 /**
-* class router
-* @version 1.1
+* router class
 */
 class router
 {
 	protected	$routes = array();
 	const		NO_ROUTE = 1;
 	
+
+    /**
+    * get all routes
+    * get the URLs, the variables, the modules and the actions of all routes, use the "/applications/config/routes.xml" file.
+    * @param string current url (optionnal)
+    * @return array list of routes object
+    */
+	public function getAllRoutes($currentUrl = null)
+	{
+	    //get content of the file.
+	    $xml = new \DOMDocument;
+	    $xml->load(__DIR__.'/../applications/config/routes.xml');
+	    $file = $xml->getElementsByTagName('route');
+	     
+	    //parse the content.
+	    $varsNames = array();
+	    $varsValues = array();
+	    $varsList = array();
+	    
+	    foreach($file as $line)
+	    {
+	        	        
+	        //create the route.
+	        $varsNames = explode(',', $line->getAttribute('vars')); //get the name of all variables 	        
+	        $route = new route($line->getAttribute('url'), $line->getAttribute('module'), $line->getAttribute('action'), $line->getAttribute('name'), $varsNames);
+	        
+	        //get variables.
+	        if($varsValues = $route->match($currentUrl))
+	        {
+	            array_shift($varsValues); // the first result contain the full captured string (cf. pregmatch manual).
+		    
+	            foreach($varsValues as $key => $match)
+	            	$varsList[$varsNames[$key]] = $match;
+                
+    			$route->setVars($varsList);
+    	        
+	        }
+	
+	        //add the route to the router.
+	        $this->addRoute($route);
+	    }
+	    
+	    //return all routes.
+	    return $this->routes;
+	}
+	
+	
 	/**
-	* add a route to the router 
+	* add a route to the router.
 	* @param object route
+	* @return void
 	*/
 	public function addRoute(Route $route)
 	{
-		if(!in_array($route, $this->routes))
-		{
+		if(!in_array($route, $this->routes)) //check if the route is not already registered.
 			$this->routes[] = $route;
-		}
 	}
 	
-	/**
-	* get urls, variables, modules and actions of all routes in routes file
-	* return object routes
-	*/
-	public function getAllRoutes()
-	{			
-		$xml = new \DOMDocument;
-		$xml->load(__DIR__.'/../applications/config/routes.xml');
-		$routes = $xml->getElementsByTagName('route');		
-		foreach($routes as $route)
-		{
-			$vars = array();			
-			// get variables
-			if($route->hasAttribute('vars'))
-			{
-				$vars = explode(',', $route->getAttribute('vars'));
-			}
-			// add routes to router
-			$this->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $route->getAttribute('name'), $vars));
-		}
-		return $this->routes;
-	}
 	
 	/**
-	* get route of a URL
-	* @param string the url to search
+	* get the route associate to an URL.
+	* @param string the url
 	* @return route|exception return matched route or exception
 	*/
 	public function getRoute($url)
 	{
-		// get all routes
-		$this->getAllRoutes();
-		
-		foreach($this->routes as $route)
-		{
-			// check if the url is in the route
-			if(($varsValues = $route->match($url)) !== false)
-			{
-				// check if the route has variables
-				if ($route->hasVars())
-				{
-					$varsNames = $route->getVarsNames();
-					$listVars = array();
-				
-					// creating array with key / value
-					// (key = name of the variable, value = it's value.)
-					foreach ($varsValues as $key => $match)
-					{
-						// the first value contain the full captured string (cf. pregmatch manual)
-						if ($key !== 0)
-						{
-							$listVars[$varsNames[$key - 1]] = $match;
-						}
-					}
-					// assign this array of variables to the route
-					$route->setVars($listVars);
-				}
-				$res = $route;
-			}
-		}
-		if(isset($res))
-			return $res;
-		else
+	 	// get all routes.
+		$this->getAllRoutes($url);
+
+		// filter the route.
+		$route = @array_shift(array_values(array_filter($this->routes, function($object)
+		    {
+		        return $object->match($_SERVER['REQUEST_URI']);
+		    })));
+
+
+		if(isset($route))
+		  {
+			return $route;
+		  }		
+else
 			throw new \RuntimeException(_TR_NoRouteSpecified, self::NO_ROUTE);
 	}
-	
-	
-	
-	
 }
 
 

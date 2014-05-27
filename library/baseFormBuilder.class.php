@@ -9,7 +9,6 @@ namespace library;
 
 /**
 * base form builder
-* @version 1.1
 * @author cyril bazin <crlbazin@gmail.com>
 */
 abstract class baseFormBuilder
@@ -17,29 +16,28 @@ abstract class baseFormBuilder
 	protected $form;
 	
 	/**
-	* constructor of the base form builder class
-	* instantiate a new form
-	* @param entity entity used to create the form
+	* constructor of the base form builder class.
+	* @param \library\entity entity used to create the form
+	* @return void
 	*/
-	public function __construct($entity)
+	public function __construct(baseEntity $entity)
 	{
 		$this->form = new form($entity);
 	}
 
 	/**
-	* build form 
+	* abstract build form method 
 	*/
 	abstract public function build();
 	
 	/**
-	* get form
-	* @return object form
-	*/
+	 * get form
+	 * @return \library\form
+	 */
 	public function getForm()
 	{
 		return $this->form;
 	}
-		
 	
 }
 ?>

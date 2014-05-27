@@ -11,7 +11,6 @@ namespace applications\modules\instances\forms;
 
 /**
 * categories form
-* @version 1.0
 */
 class categoriesForm extends \library\baseFormBuilder
 {

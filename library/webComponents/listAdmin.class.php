@@ -6,7 +6,6 @@ namespace library\webComponents;
 * admin list web component
 * @author cyril bazin
 * @package cu.core
-* @version 1.1
 */
 class listAdmin extends \library\field
 {
@@ -18,10 +17,10 @@ class listAdmin extends \library\field
 		$widget = '
 		<!-- boutons action -->
 		<div class="btn-group primary" style="float:left;margin-right : 10px;">
-			<button class="btn btn-primary dropdown-toggle btn-small" data-toggle="dropdown">Actions <span class="caret"></span></button>
+			<button class="btn btn-primary dropdown-toggle btn-small" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Actions <span class="caret"></span></button>
 			<ul class="dropdown-menu">
-				<li><a href="'.WEBSITE_ROOT.'/admin/'.encodeHtmlString($this->module).'/add'.encodeHtmlString($paramAdd).'"><i class="icon-plus"></i> Ajouter</a></li>
-				<li><a href="#" onclick="if(confirm(\'Voulez vous vraiment supprimer ?\')){$(\'#formAction\').val(\'delete\'); window.document.form'.str_replace("\\", "", $this->module).'.submit();}"><i class="icon-trash"></i> Supprimer</a></li>
+				<li><a href="'.WEBSITE_ROOT.'/admin/'.encodeHtmlString($this->module).'/add'.encodeHtmlString($paramAdd).'"><span class="glyphicon glyphicon-plus"></span> Ajouter</a></li>
+				<li><a href="#" onclick="if(confirm(\'Voulez vous vraiment supprimer ?\')){$(\'#formAction\').val(\'delete\'); window.document.form'.str_replace("\\", "", $this->module).'.submit();}"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></li>
 			</ul>
 		</div><!-- /btn-group -->';
 		
@@ -52,8 +51,8 @@ class listAdmin extends \library\field
 				else if($key == "name")
 					$widget .= '<td><a href="'.WEBSITE_ROOT.'/admin/'.encodeHtmlString($this->module).'/edit/'.$value->id.'">'.$val.'</a></td>';
 				//don't show result when the type of field is id
-				//else if($key == "id")
-				//	{}
+				else if($key == "id")
+					{}
 				else
 					$widget .= '<td>'.$val.'</td>';
 			}

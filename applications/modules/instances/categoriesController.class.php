@@ -10,100 +10,67 @@ namespace applications\modules\instances;
 
 /**
 * instances controller
-* @version 1.0
 */
-class categoriesController extends \library\baseController //implements \library\interfaces\iCrud
+class categoriesController extends \library\baseController
 {
 
-	
-
+	/**
+	* admin controller
+	* @return void
+	*/
 	public function adminAction()
 	{	
-		if($_SESSION['users']->level >= 8)
-		{
-			//get the categories manager
-			$this->categoriesManager = $this->baseManager->getManagerOf('instances\categories');
-			
-			//get the admin component
-			$listAdmin = new \library\webComponents\listAdmin(array(
-				'module'	=> 'categories',
-				'title'		=> "Administration des thèmes",
-				'columns'	=> array(_TR_Id, _TR_Name),
-				'data'		=> $this->categoriesManager->getAll(array("id", "name"))
-			));
-			
-			$this->page->addVar('listAdmin', $listAdmin->build());
-		}
+		//get the categories manager
+		$this->categoriesManager = $this->baseManager->getManagerOf('instances\categories');
+		
+		//get the admin component
+		$listAdmin = new \library\webComponents\listAdmin(array(
+			'module'	=> 'categories',
+			'title'		=> "Administration des th&egrave;mes",
+			'columns'	=> array(_TR_Name),
+			'data'		=> $this->currentManager->getAll(array("id", "name"))
+		));
+		
+		$this->page->addVar('listAdmin', $listAdmin->build());
 	}
-	
-	
+		
+	/**
+	* edit a category
+	* @param \library\httpRequest $request
+	* @return void
+	*/
 	public function editAction(\library\httpRequest $request)
-	{
-		if($_SESSION['users']->level >= 8)
+	{		
+		$formBuilder = new \applications\modules\instances\forms\categoriesForm($this->currentEntity);
+		$formBuilder->build();
+		$form = $formBuilder->getForm();
+		if($request->isPosted() && $form->isValid())
 		{
-			//get manager
-			$categoriesManager = $this->baseManager->getManagerOf('instances\categories');
-			$categories = $categoriesManager->getById($request->getGET('categories'));
-			$categoriesEntity = new \applications\modules\instances\entities\categoriesEntity();
-			$categoriesEntity->hydrate($categories[0]);
-				
-			//get users entitiy
-			//data processing
-			if(!empty($_POST))
-				$categoriesEntity->setName($request->getData('name'));
-			
-			//create form
-			$formBuilder = new \applications\modules\instances\forms\categoriesForm($categoriesEntity);
-			$formBuilder->build();
-			$form = $formBuilder->getForm();
-			
-			if($form->isValid() == false)
-				$this->page->addVar('msgError', $form->displayErrorMsg());
-			else if(!empty($_POST))
-			{
-				$this->baseManager->getManagerOf('instances\categories')->save($categoriesEntity);
-				$this->page->addVar('msgSuccess', "thème mis &agrave; jour avec succ&egrave;s");
-			}
-			
-			$this->page->addVar('form', $form->createView());
+			$this->currentManager->save($this->currentEntity);
+			$this->page->addVar('msgSuccess', "th&egrave;me mis &agrave; jour avec succ&egrave;s");
 		}
-		else
-			header("location:".WEBSITE_ROOT);		
+		
+		$this->page->addVar('form', $form->createView());			
 		
 	}
 	
+	/**
+	* add a category
+	* @param \library\httpRequest $request
+	* @return void
+	*/
 	public function addAction(\library\httpRequest $request)
-	{
-		if($_SESSION['users']->level >= 8)
+	{			
+		$formBuilder = new \applications\modules\instances\forms\categoriesForm($this->currentEntity);
+		$formBuilder->build();
+		$form = $formBuilder->getForm();
+		if($request->isPosted() && $form->isValid())
 		{
-			//get manager
-			$categoriesManager = $this->baseManager->getManagerOf('instances\categories');			
-			//get entities
-			$categoriesEntity = new \applications\modules\instances\entities\categoriesEntity();
-				
-			//get users entitiy
-			//data processing
-			if(!empty($_POST))
-				$categoriesEntity->setName($request->getData('name'));
-			
-			//create form
-			$formBuilder = new \applications\modules\instances\forms\categoriesForm($categoriesEntity);
-			$formBuilder->build();
-			$form = $formBuilder->getForm();
-			
-			if($form->isValid() == false)
-				$this->page->addVar('msgError', $form->displayErrorMsg());
-			else if(!empty($_POST))
-			{
-				$this->baseManager->getManagerOf('instances\categories')->save($categoriesEntity);
-				$this->page->addVar('msgSuccess', "thème mis &agrave; jour avec succ&egrave;s");
-			}
-			
-			$this->page->addVar('form', $form->createView());
+			$this->currentManager->save($this->currentEntity);
+			$this->page->addVar('msgSuccess', "th&egrave;me mis &agrave; jour avec succ&egrave;s");
 		}
-		else
-			header("location:".WEBSITE_ROOT);		
 		
+		$this->page->addVar('form', $form->createView());		
 	}
 	
 }

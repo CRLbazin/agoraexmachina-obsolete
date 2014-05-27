@@ -9,7 +9,7 @@ namespace library;
 
 /**
 * field class
-* @version 1.1
+* field corresponding to the forms
 * @author cyril bazin <crlbazin@gmail.com>
 */
 abstract class field
@@ -22,14 +22,16 @@ abstract class field
 	protected $data;
 	protected $module;
 	protected $class;
-	protected $page;
+	protected $surveyPannel;
+	protected $inputgroups;
 	protected $validators = array();
 	protected $errorMsg = array();
 	
 
 	/**
-	* constructor of the field class
+	* constructor of the field class.
 	* @param array values used to hydrate the field
+	* @return void
 	*/
 	public function __construct(array $values = array())
 	{
@@ -38,14 +40,15 @@ abstract class field
 	}
 	
 	/**
-	* build field
+	* abstract build field method.
 	*/
 	abstract public function build();
 	
 	
 	/**
-	* set the name of the field
+	* set the name of the field.
 	* @param string name of the field
+	* @return void
 	*/
 	public function setName($name)
 	{
@@ -54,7 +57,7 @@ abstract class field
 	
 	
 	/**
-	* get the name of the field
+	* get the name of the field.
 	* @return string name of the field
 	*/
 	public function getName()
@@ -63,7 +66,7 @@ abstract class field
 	}
 	
 	/**
-	* get the title of the field
+	* get the title of the field.
 	* @return string title of the field
 	*/
 	public function getTitle()
@@ -71,41 +74,40 @@ abstract class field
 		return $this->title;
 	}
 	
+	
 	/**
-	* set the page 
-	* @param string name of the page
-	*/
-	public function setPage($page)
+	 * set the survey pannel number.
+	 * @param string name of the page
+	 */
+	public function setSurveyPannel($surveyPannel)
 	{
-		print_r($this->page);
-		$this->page = $page;
+	    $this->surveyPannel = $surveyPannel;
 	}
 	
 	/**
-	* get the page of the field
-	* @return string name of the page
-	*/
-	public function getPage()
+	 * get the survey pannel number.
+	 * @return string name of the page
+	 */
+	public function getSurveyPannel ()
 	{
-		return $this->page;
+	    return $this->surveyPannel ;
 	}
 	
-	
-	
 	/**
-	* hydrate the field
+	* hydrate the field.
 	* @param array values used to hydrate the field
+	* @return void
 	*/
 	public function hydrate($values)
-	{		
+	{
 		foreach($values as $key=>$value)
 			$this->$key = $value;
 			
 	}
 	
 	/**
-	* get validators
-	* return object validators of the current field
+	* get validators.
+	* @return array validators of the current field
 	*/
 	public function getValidators()
 	{
@@ -114,18 +116,28 @@ abstract class field
 	
 	
 	/**
-	* is valid method
-	* valid the field. All validators must return true
+	* is valid method.
 	* @return bool false=invalid, true=valid
 	*/
 	public function isValid()
 	{
+		$res = true;
+		
 		foreach($this->validators as $validator)
 			if(!$validator->isValid($this->value))
-				return false;
+			{
+				$error = new \library\error(array(
+					'type'	=> \library\error::TYPE_ERR,
+					'msg'	=> $validator->getErrorMsg(),
+					'div'	=> 'field_error_msg_'.$this->getName(),
+				));
 				
-		return true;
-		}
+				\library\handleErrors::setErrors($error);
+				$res = false;
+			}
+			
+			return $res;
+	}
 	
 	/**
 	* get errors validation message 

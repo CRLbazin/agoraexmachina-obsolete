@@ -10,6 +10,12 @@ namespace library\validators;
 */
 class emailValidator extends \library\baseValidator
 {
+	
+	public function setErrorMsg()
+	{
+		$this->errorMsg = _TR_EmailFormat;
+	}
+	
 
 	public function isValid($value)
 	{

@@ -1,15 +1,16 @@
-﻿AGORA Ex Machina - Plateforme de democratie liquide
+AGORA Ex Machina - Plateforme de democratie liquide
 ==========================================================
 
 Présentation générale
 ------------------------
-AGORA EX MACHINA (AEM) est une plateforme WEB de démocratie liquide s'inspirant de la solution allemande Adhocracy.
+AGORA EX MACHINA (AEM) est une plateforme WEB de démocratie liquide s'inspirant initialement de la solution allemande Adhocracy.
 
-L'outil permet de créer des `ateliers de travail` organisés par `thèmes`, où chaque membre peut participer aux discussions et aux `votes` de propositions.
+L'outil permet de créer des `ateliers de discussion` organisés par `thèmes`, où chaque membre peut participer aux discussions et aux `votes` des propositions.
 
-Les propositions ayant recueilli le plus de voix sont validées à l'issu de l'atelier.
+Les propositions ayant recueillies le plus de votes sont validées à l'issu de l'atelier.
 
-Liquide signifie que chaque utilisateur peut à tout instant, déléguer sa voix ou retirer sa délégation.
+Le terme `Liquide` signifie que chaque utilisateur peut à tout instant, déléguer sa voix ou retirer sa délégation.
+
 
 Présentation technique
 ---------------------------
@@ -26,8 +27,7 @@ Outils utilisés
 *********************
 * Bootstrap
 * Jquery
-* Frameworks CUP <https://github.com/CRLbazin/cup_mvc>
-
+* Framework CUP <https://github.com/CRLbazin/cup_mvc>
 
 
 

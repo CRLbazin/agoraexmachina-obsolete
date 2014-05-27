@@ -4,12 +4,12 @@
 * @package cu.core
 * @copyright GNU GPL
 * @filesource
+* @todo � refactoriser
 */
 namespace library;
 
 /**
 * class breadcrumb
-* @version 1.1
 * @author cyril bazin <crlbazin@gmail.com>
 */
 class breadcrumb
@@ -19,6 +19,7 @@ class breadcrumb
 	/**
 	* build breadcrumb
 	* @param HTTP_GET HTTP Get Request
+	* @return void
 	*/
 	public function build($httpRequest)
 	{	

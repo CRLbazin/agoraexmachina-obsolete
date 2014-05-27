@@ -17,8 +17,12 @@ class parser
 
 	public function addCodeDefinitionSet()
 	{
-		array_push($this->codeDefinitionSet, array('/\[b\](\w*)\[\/b\]/', '<b>${1}</b>'));
-		array_push($this->codeDefinitionSet, array('/\[u\](\w*)\[\/u\]/', '<u>${1}</u>'));
+		array_push($this->codeDefinitionSet, array('/\[h1\]([\w\W]*)\[\/h1\]/', '<h1>${1}</h1>'));
+		array_push($this->codeDefinitionSet, array('/\[h2\]([\w\W]*)\[\/h2\]/', '<h2>${1}</h2>'));
+		array_push($this->codeDefinitionSet, array('/\[h3\]([\w\W]*)\[\/h3\]/', '<h3>${1}</h3>'));
+		array_push($this->codeDefinitionSet, array('/\[h4\]([\w\W]*)\[\/h4\]/', '<h4>${1}</h4>'));
+		array_push($this->codeDefinitionSet, array('/\[u\]([\w\W]*)\[\/u\]/', '<u>${1}</u>'));
+		array_push($this->codeDefinitionSet, array('/\[mail\]([\w\W]*)\[\/mail\]/', '<a href=\'mailto:${1}\'>${1}</a>'));
 		array_push($this->codeDefinitionSet, array('/\[br\]/', '<br />'));
 	}
 	

@@ -1,6 +1,6 @@
 <?php
 /**
-* file for the users form
+* file for the private users form
 * @author cyril bazin <crlbazin@gmail.com>
 * @copyright GNU GPL
 * @package cu.users
@@ -9,17 +9,24 @@
 namespace applications\modules\users\forms;
 
 /**
-* users form
+* private form
 * @version 1.0
 */
 class privateForm extends \library\baseFormBuilder
 {
 	/**
-	* build users form
+	* build private users form
 	* @todo variabilize the titles
 	*/
 	public function build()
 	{
+		$this->form->add(new \library\webComponents\text(
+			array(
+				'title' 	=> _TR_Id,
+				'name' 		=> 'id',
+				'readonly'	=> 'readonly',
+				'value' 	=>  $this->form->getEntity()->getId(),
+			)));
 		$this->form->add(new \library\webComponents\text(
 			array(
 				'title' => _TR_Name,
@@ -48,6 +55,13 @@ class privateForm extends \library\baseFormBuilder
 					new \library\validators\notNullValidator("<b>"._TR_Password.'</b> : '._TR_NotNull),
 					new \library\validators\passwordValidator("<b>"._TR_Password.'</b> : '._TR_PasswordFormat),
 				)
+			)));
+		$this->form->add(new \library\webComponents\text(
+			array(
+				'title' => _TR_CreationDate,
+				'name' => 'Date de creation',
+				'value' =>  $this->form->getEntity()->getCreationDate(),
+					'readonly'	=> 'readonly',
 			)));
 	}
 	

@@ -1,6 +1,6 @@
 <?php
 /**
-* file for the routes class
+* file for the routes class.
 * @author cyril bazin <crlbazin@gmail.com>
 * @package cu.core
 * @copyright GNU GPL
@@ -10,7 +10,6 @@ namespace library;
 
 /**
 * class route
-* @version 1.1
 */
 class route
 {
@@ -23,13 +22,14 @@ class route
 	
 	
 	/**
-	* route constructor
-	* set url, module, action, name and variables
-	* @param string url in the route 
-	* @param string module in the route
-	* @param string action in the route
-	* @param string name in the route
-	* @param array variables in the route
+	* route constructor.
+	* set url, module, action, name and variables of the route.
+	* @param string url of the route 
+	* @param string module of the route
+	* @param string action of the route
+	* @param string name of the route
+	* @param array variables of the route
+	* @return void
 	*/
 	public function __construct($url, $module, $action, $name, array $varsNames)
 	{
@@ -41,12 +41,15 @@ class route
 	}
 	
 	/**
-	* check if the road contains the current URL
+	* check if the route contains the current URL.
 	* @param string url
-	* @return string route corresponding to the URL or false
+	* @return array results of search. $matches[0] will contain the text that matched the full pattern, $matches[1] will have the text that matched the first captured parenthesized subpattern, and so on.
 	*/
 	public function match($url)
 	{
+	   $url = preg_replace('/(\/+)$/', "", $url);
+	   $this->url = preg_replace('/(\/+)$/', "", $this->url);
+	   
 		if(preg_match('`^'.$this->url.'$`', $url, $matches))
 			return $matches;
 		else
@@ -54,8 +57,8 @@ class route
 	}
 	
 	/**
-	* check if route has variables
-	* @return bool true of false if the route has variables
+	* check if the route has variables.
+	* @return bool returns FALSE if var exists and has a non-empty, non-zero value. Otherwise returns TRUE
 	*/
 	public function hasVars()
 	{
@@ -63,8 +66,9 @@ class route
 	}
 	
 	/**
-	* set url of the route
+	* set url of the route.
 	* @param string url of the route
+	* @return void 
 	*/
 	public function setUrl($url)
 	{
@@ -73,8 +77,9 @@ class route
 	}
 	
 	/**
-	* set name of the route
+	* set name of the route.
 	* @param string name of the route
+	* @return void
 	*/
 	public function setName($name)
 	{
@@ -84,8 +89,9 @@ class route
 	
 		
 	/**
-	* set module of the route
+	* set module of the route.
 	* @param string name of the module
+	* @return void
 	*/
 	public function setModule($module)
 	{
@@ -94,8 +100,9 @@ class route
 	}
 	
 	/**
-	* set action of the route
+	* set action of the route.
 	* @param string name of the action
+	* @return void
 	*/
 	public function setAction($action)
 	{
@@ -104,8 +111,9 @@ class route
 	}
 	
 	/**
-	* set variables of the route
+	* set variables of the route.
 	* @param array list of variables
+	* @return void
 	*/
 	public function setVarsNames($varsNames)
 	{
@@ -113,7 +121,7 @@ class route
 	}
 	
 	/**
-	* get url of the route
+	* get url of the route.
 	* @return string url of the route
 	*/
 	public function getUrl()
@@ -122,7 +130,7 @@ class route
 	}
 	
 	/**
-	* get name of the route
+	* get name of the route.
 	* @return string name of the route
 	*/
 	public function getName()
@@ -131,8 +139,8 @@ class route
 	}
 	
 	/**
-	* get module of the route
-	* @return string module of the route
+	* get module of the route.
+	* @return string module name of the route
 	*/
 	public function getModule()
 	{
@@ -140,8 +148,8 @@ class route
 	}
 	
 	/**
-	* get action of the route
-	* @return string action of the route
+	* get action of the route.
+	* @return string action name of the route
 	*/
 	public function getAction()
 	{
@@ -149,7 +157,7 @@ class route
 	}
 	
 	/**
-	* get list of the variables of the route
+	* get list of the variables of the route.
 	* @return array list of variables
 	*/
 	public function getVarsNames()
@@ -158,7 +166,7 @@ class route
 	}
 	
 	/**
-	* get variables of the route
+	* get variables of the route.
 	* @return string variable
 	*/
 	public function getVars()
@@ -168,7 +176,7 @@ class route
 	
 	/**
 	* set variables of the route
-	* @return string variable
+	* @return void
 	*/
 	public function setVars($vars)
 	{

@@ -10,6 +10,13 @@ namespace library\validators;
 */
 class notNullValidator extends \library\baseValidator
 {
+	
+	
+	public function setErrorMsg()
+	{
+		$this->errorMsg = _TR_NotNull;
+	}
+	
 
 	public function isValid($value)
 	{

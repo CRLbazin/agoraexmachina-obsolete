@@ -5,8 +5,8 @@
 		mode : "textareas",
 		theme : "advanced",
 		editor_selector : "tinymce",
-		width: "840",
-		height: "500",
+		width: "700",
+		height: "250",
 	});
 	
 	
@@ -20,8 +20,10 @@
 	$('#myTab a').click(function (e) 
 	{
 		e.preventDefault();
+		  window.location.hash = $(this).attr('href');
 		$(this).tab('show');
     })
+    
 	
 	
 	//show buttons with tabs
@@ -34,6 +36,14 @@
 	
 	$('#myModal').on('hidden.bs.modal', function () {
 		$(this).removeData('bs.modal');
+		window.location.reload(true);
 	});
+	
+	
+	if(window.location.hash){
+		   $('#myTab').find('a[href="'+window.location.hash+'"]').tab('show');
+		}
+	
+	
 	
 });

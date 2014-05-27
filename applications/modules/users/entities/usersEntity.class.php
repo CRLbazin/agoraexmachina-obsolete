@@ -10,9 +10,8 @@ namespace applications\modules\users\entities;
 
 /**
 * users entity
-* @version 1.0
 */
-class usersEntity extends \library\baseEntity
+class usersEntity extends \library\baseEntity implements \applications\modules\users\interfaces\IUsersEntity
 {
 	protected	$id,
 				$name,
@@ -26,6 +25,7 @@ class usersEntity extends \library\baseEntity
 	/**
 	* setter id
 	* @param int id of the user
+	* @return void
 	*/
 	public function setId($id)
 	{
@@ -44,6 +44,7 @@ class usersEntity extends \library\baseEntity
 	/**
 	* setter name
 	* @param string name of the user
+	* @return void
 	*/
 	public function setName($name)
 	{
@@ -62,6 +63,7 @@ class usersEntity extends \library\baseEntity
 	/**
 	* setter password
 	* @param string password of the user
+	* @return void
 	*/
 	public function setPassword($password)
 	{
@@ -98,6 +100,7 @@ class usersEntity extends \library\baseEntity
 	/**
 	* setter active
 	* @param int active of the user
+	* @return void
 	*/			
 	public function setActive($active)
 	{
@@ -116,6 +119,7 @@ class usersEntity extends \library\baseEntity
 	/**
 	* setter level
 	* @param int level of the user
+	* @return void
 	*/	
 	public function setLevel($level)
 	{
@@ -135,6 +139,7 @@ class usersEntity extends \library\baseEntity
 	/**
 	* setter creationDate
 	* @param int creationDate of the user
+	* @return void
 	*/	
 	public function setCreationDate($creationDate)
 	{
@@ -149,9 +154,6 @@ class usersEntity extends \library\baseEntity
 	{
 		return $this->creationDate ;
 	}
-	
-	
-	
 	
 }
 ?>

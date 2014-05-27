@@ -10,7 +10,6 @@ namespace applications\modules\instances\entities;
 
 /**
 * votes entities
-* @version 1.0
 */
 class votesEntity extends \library\baseEntity
 {

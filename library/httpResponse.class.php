@@ -1,45 +1,37 @@
 <?php
 /**
-* file for the httpResponse class
+* file for the HTTP response class
 * @author cyril bazin <crlbazin@gmail.com>
 * @package cu.core
-* @copyright GNU GPL
+* @license GNU GPL
 * @filesource
 */
 namespace library;
 
 /**
-* http response manager class
-* @version 1.1
+* HTTP response manager class
 */
 class httpResponse
 {
-	protected $page;
-
+	
 	/**
-	* send a http response
+	* send a HTTP response to the client.
+	* @param string content of the data to send to the client
+	* @return void
 	*/
-	public function send()
+	public function send($content)
 	{
-		exit($this->page->getGeneratedPage());
+		exit($content);
 	}
 	
 	
 	/**
-	* set page
-	* @param object page
-	*/
-	public function setPage(Page $page)
-	{
-		$this->page = $page;
-	}
-	
-	/**
-	* redirect error 404 page not found
+	* redirect where page not found. 
+	* @return void
 	*/
 	public function redirect404()
 	{
-		if(VAR_ENABLE_REDIRECT_404 == "1")
+		if(ENABLE_REDIRECT_404 == "1")
 			header("location:".WEBSITE_404);	
 	}
 }

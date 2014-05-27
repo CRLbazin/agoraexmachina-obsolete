@@ -9,7 +9,6 @@ namespace library;
 
 /**
 * form class
-* @version 1.1
 * @author cyril bazin <crlbazin@gmail.com>
 */
 class form
@@ -18,19 +17,22 @@ class form
 	protected $fields = array();
 	protected $entity;
 	protected $errorMsg = array();
+	protected $class = "";
 	
 	/**
-	* form class constructor
-	* @param object entity linked to the form
-	*/
-	public function __construct($entity)
+	 * form constructor
+	 * @param baseEntity $entity
+	 * @eturn void
+	 */
+	public function __construct(baseEntity $entity)
 	{
 		$this->setEntity($entity);
 	}
 	
 	/**
-	* set the entity
-	* @param object entity linked to the form	
+	* set the entity associate to the form.
+	* @param object entity associate to the form
+	* @return void
 	*/
 	public function setEntity($entity)
 	{
@@ -39,8 +41,8 @@ class form
 	
 	
 	/**
-	* get the entity
-	* @return object entity linked to the form
+	* get the entity associate to the form.
+	* @return object entity associate to the form
 	*/
 	public function getEntity()
 	{
@@ -48,8 +50,9 @@ class form
 	}
 	
 	/**
-	* add field to the form
-	* @param array list of fields
+	* add field to the form.
+	* @param object field
+	* @return void
 	*/
 	public function add(field $field)
 	{
@@ -57,21 +60,22 @@ class form
 	}
 	
 	/**
-	* check all fields are valid
-	* @return bool false=invalid, true=valid	
+	* Check if all fields are valid.
+	* @return bool if at least, one field is invalid, retur false. Otherwise return true.
 	*/
 	public function isValid()
 	{
+		$res = true;
 		foreach($this->fields as $field)
 			if(!$field->isValid())
-				return false;
+				$res = false;
 				
-		return true;
+		return $res;
 		
 	}
 	
 	/**
-	* get errors validation message 
+	* get errors validation message.
 	* @return string error message
 	*/
 	public function getErrorMsg()
@@ -82,9 +86,21 @@ class form
 		return $this->errorMsg;
 	}
 	
+	/**
+	* apply CSS class to the form.
+	* @param string name of the CSS class
+	*/
+	public function setClass($value)
+	{
+		if(isset($value))
+		{
+			$this->class = $value;
+		}
+	}
+	
 	/*
-	* display all error messages
-	* @return string error message formatted in html list 
+	* display all error messages.
+	* @return string error message formatted in HTML list 
 	*/
 	public function displayErrorMsg()
 	{
@@ -99,31 +115,46 @@ class form
 	
 	
 	/**
-	* create a simple form
-	* @return string view form formatted in class form html
+	* create a simple form.
+	* @return string formulary formatted in HTML
 	*/
 	public function createView()
 	{
 		$view = "
-			<form action='#' method='post' name='".uniqid('form')."'  enctype='multipart/form-data'>
+			<form action='#' method='post' name='".uniqid('form')."'  enctype='multipart/form-data' role='form' class='".$this->class."'>
 			<table class='table'>";
 		
-		// for all fields of the form
+		// for all fields of the form...
 		foreach($this->fields as $field)
 		{
-			// check if field is an hidden component or a separator component
-			// just for presentation
+			// ... check if the field is an hidden component or a separator component
 			if(get_class($field) == "library\webComponents\hidden" || get_class($field) == "library\webComponents\separator")
-				$view .= "<tr><td colspan='2'>".$field->build()."</td></tr>";
+				$view .= "<tr><td colspan='2'  style='border:0px;'>".$field->build()."</td></tr>";
 			else
-				$view .= "<tr><td>".$field->getTitle()."</td><td>".$field->build()."</td></tr>";
+			{
+				$view .= "
+						<tr>
+							<td style='min-width:100px;'>".$field->getTitle()."</td>
+							<td>".$field->build()."</td>
+						</tr>";
+				
+				$errors = \library\handleErrors::getErrorsByDiv("field_error_msg_".$field->getName());
+				if(!empty($errors))
+				{
+					foreach($errors as $error)
+					{
+						$view .= "<tr>
+									<td style='border : 0px;'></td><td style='border : 0px;'><div class='fg-red field_error_msg_".$field->getName()."'>".$error->getMsg()."</div>
+								</tr>";
+					}
+				}
+			}
 		}
 		
 		$view .= '
 				<tr>
 					<td colspan="2">
-						<!--<a class="btn btn-default" onClick="this.history.go(-1)">Retour</a>-->
-						<input class="btn btn-success" type="submit" />
+						<button class="btn btn-primary" type="submit" id="submit"><span class="glyphicon glyphicon-ok"></span> Valider</button>
 						<input type="hidden" name="form_entity" value="'.get_class($this->getEntity()).'"/>
 					</td>
 				</tr>
@@ -135,17 +166,14 @@ class form
 	
 	
 	/**
-	* create a survey 
-	* @return string view form formatted in survey html
+	* create a survey. 
+	* @return string formulary formatted in survey mode
 	*/
 	public function createSurvey()
 	{
-		/*
-		* init
-		*/
 		$i = 1;
 
-		$view = '
+		$view .= '
 			<form action="#" method="post" name="'.uniqid('form').'"  enctype="multipart/form-data">';
 		
 		$view .= '
@@ -155,7 +183,7 @@ class form
 		$nbPage = sizeof($this->fields) - 1;
 		foreach($this->fields as $field)
 		{
-			if($field->getPage() == $i)
+			if($field->getSurveyPannel () == $i)
 			{
 			
 				if($i == 1)
@@ -168,7 +196,7 @@ class form
 				$view .= '<tr><td colspan="2"><h4>Etape '.$i.' / '.$nbPage.'</h4></td></tr>';
 				
 				foreach($this->fields as $field2)
-					if($field2->getPage() == $i)
+					if($field2->getSurveyPannel() == $i)
 						$view .= '<tr><td>'.$field2->getTitle().'</td><td>'.$field2->build().'</td></tr>'; 
 				
 				$im = $i - 1;
@@ -177,7 +205,7 @@ class form
 				$view .= '
 				<tr>
 					<td colspan="2" style="text-align : center">
-						<a href="#page'.$im.'" data-toggle="tab"><i class="icon-arrow-left"></i> Précédent</a>
+						<a href="#page'.$im.'" data-toggle="tab"><i class="icon-arrow-left"></i> Pr&eacute;c&eacute;dent</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a href="#page'.$ip.'" data-toggle="tab">Suivant <i class="icon-arrow-right"></i></a>
 					</td>

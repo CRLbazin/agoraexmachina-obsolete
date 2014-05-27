@@ -12,7 +12,6 @@ use applications\modules\instances\entities;
 
 /**
 * instances manager
-* @version 1.0
 */
 class instancesManager extends \library\baseManager
 {
@@ -23,6 +22,22 @@ class instancesManager extends \library\baseManager
 		//define name of the module
 		$this->module = 'instances' ;
 	}
+	
+	/**
+	 * delete
+	 * execute a query "delete" with a filter on id
+	 * @param int id of the row to deleted
+	 */
+	public function delete($values)
+	{
+		if(is_array($values))
+		foreach($values as $key=>$value)
+			$this->db->exec("DELETE FROM instances WHERE ".$key ." = '".$value."'");
+		else
+			$this->db->exec("DELETE FROM instances WHERE id = '".$values."'");
+			
+	}
+	
 	
 	/**
 	* get an object by categories
@@ -86,7 +101,7 @@ class instancesManager extends \library\baseManager
 		
 		
 		if(!$req->execute())
-			echo $req->errorInfo()[2];
+			return false;
 		else
 			return true ;
 	}

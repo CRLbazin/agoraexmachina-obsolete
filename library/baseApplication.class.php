@@ -9,7 +9,6 @@ namespace library;
 
 /**
 * base application class
-* @version 1.1
 * @author cyril bazin <crlbazin@gmail.com>
 */
 abstract class baseApplication

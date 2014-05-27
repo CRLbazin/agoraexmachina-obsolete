@@ -10,7 +10,6 @@ namespace applications\modules\admin;
 
 /**
 * admin controller
-* @version 1.1
 */
 class adminController extends \library\baseController
 {

@@ -10,29 +10,25 @@ namespace applications\modules\home;
 
 /**
 * home controller
-* @version 1.1
 */
 class homeController extends \library\baseController
 {
 
 	/**
 	* index of the home page
+	* @return void
 	*/
 	public function indexAction()
 	{
-		// set layout
 		$this->page->setLayout("front");
-		
-		//get categories manager
 		$categoriesManager = $this->baseManager->getManagerOf('instances\categories');
-		
-		//display result
 		$this->page->addVar('categories', $categoriesManager->getAllWithInstancesCount());
 		
 	}
 	
 	/**
 	* 404 action
+	* @return void
 	*/
 	public function redirect404Action()
 	{

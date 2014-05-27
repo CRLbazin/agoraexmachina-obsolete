@@ -15,6 +15,16 @@
 	require "header.php";		
 	require "modal.php";
 	require "menu.php";
+
+	if($handleErrors = \library\handleErrors::getErrors())
+		foreach($handleErrors as $error)
+			if($error->getType() == $error::TYPE_ERR && $error->getDiv() == 'err_global')
+				echo msgError($error->getMsg());
+
+	if($handleErrors = \library\handleErrors::getErrors())
+		foreach($handleErrors as $error)
+			if($error->getType() == $error::TYPE_SUC && $error->getDiv() == 'err_global')
+				echo msgSuccess($error->getMsg());
 	?>
 
 	<div class="container">        
