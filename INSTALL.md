@@ -49,7 +49,7 @@ Exemple :
 	<define var="VAR_ENABLE_MAIL_REGISTRATION" value="0" />
 	<define var="WEBSITE_EMAIL" value="agoraexmachina@gmail.Com" />	
 </definitions>
- 
+```
 Tips : Si la base de données est hébergée sur le même serveur que le serveur WEB, vous pouvez utiliser 127.0.0.1 pour identifier le serveur local. 
  
 
