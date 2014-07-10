@@ -29,7 +29,7 @@ Outils utilisés
 * Jquery
 * Framework CUP <https://github.com/CRLbazin/cup_mvc>
 
-
+ 
 
 Installation
 -----------------
