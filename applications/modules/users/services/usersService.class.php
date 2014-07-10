@@ -29,7 +29,7 @@ class usersService extends \library\baseService
     	//check if the email exists
     	if(!$this->checkEmailExists($user->getEmail()))
 	   	{
-	   		if(VAR_ENABLE_MAIL_REGISTRATION == 1)
+	   		if(ENABLE_MAIL_REGISTRATION == 1)
 	   		{
 	   			$user->setLevel(rand(100000, 999999));
 	   			$user->setActive(0);
@@ -47,7 +47,7 @@ class usersService extends \library\baseService
 	       		//send email
 	       		$dest = $user->getEmail();
 	           	$subject = WEBSITE_TITLE.' - Activez votre compte';
-	           	$msg = '<body><head></head><body><div style="width : 100%;height : 550px;padding : 25px;background-color : #EFEFEF"><div style="padding : 20px;width : 450px;margin-left: auto;margin-right: auto;background-color: #ffffff !important;box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 3px 8px rgba(0, 0, 0, 0.2);"><h2 style="color: #428bca !important;">Bonjour '.$user->getName().' et bienvenue</h2><hr/>Activez votre compte en cliquant sur <a href="'.WEBSITE_DNS.''.WEBSITE_ROOT.'/users/active/'. $user->getEmail() .'/'. $user->getLevel() .'/">ce lien</a>.<br/><br/>Une fois votre compte activ&eacute;, connectez-vous et rejoignez les nombreux sujets propos&eacute;s.<br/><br/>Si vous rencontrez le moindre probl&egrave;me, n&#39;h&eacute;sitez pas &agrave;  nous contacter &agrave;  l&#39;adresse suivante : contact.agoraexmachina@gmail.com<br/><br/><br/><br/><p style="color: #555555 !important;">L&#39;&eacute;quipe AGORA Ex Machina.</p></div></div></body></body>';
+	           	$msg = '<body><head></head><body><div style="width : 100%;height : 550px;padding : 25px;background-color : #EFEFEF"><div style="padding : 20px;width : 450px;margin-left: auto;margin-right: auto;background-color: #ffffff !important;box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 3px 8px rgba(0, 0, 0, 0.2);"><h2 style="color: #428bca !important;">Bonjour '.$user->getName().' et bienvenue</h2><hr/>Activez votre compte en cliquant sur <a href="'.WEBSITE_DNS.''.WEBSITE_ROOT.'/users/active/'. $user->getEmail() .'/'. $user->getLevel() .'/">ce lien</a>.<br/><br/>Une fois votre compte activ&eacute;, connectez-vous et rejoignez les nombreux sujets propos&eacute;s.<br/><br/>Si vous rencontrez le moindre probl&egrave;me, n&#39;h&eacute;sitez pas &agrave;ï¿½ nous contacter &agrave;ï¿½ l&#39;adresse suivante : contact.agoraexmachina@gmail.com<br/><br/><br/><br/><p style="color: #555555 !important;">L&#39;&eacute;quipe AGORA Ex Machina.</p></div></div></body></body>';
 		       	try
 		       	{
 		       		sendEmail($dest, $subject, $msg);
@@ -110,6 +110,18 @@ class usersService extends \library\baseService
     	$_SESSION['users'] = $user;
     }
     
+    
+    /**
+    * set session
+    * @param string name of the session
+    * @param string value of the session
+    * @return void
+    */
+    public function setSession($name, $value)
+    {
+    	$_SESSION[$name] = $value;
+    }
+    
 
     /**
     * delete element
@@ -160,6 +172,15 @@ class usersService extends \library\baseService
     	$this->currentManager->save($user);
     }
     
+    
+    /**
+    * get all active users
+    * @param array|int id of the users excepted
+    * @return array of objjects with all active users
+    */
+    public function getAllActiveUsers($excepts=null)
+    {
+    	return $this->currentManager->getAllActiveUsers($excepts);
+    }
 }
-
 ?>

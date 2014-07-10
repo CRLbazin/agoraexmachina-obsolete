@@ -15,6 +15,10 @@ use applications\modules\instances\entities;
 */
 class categoriesManager extends \library\baseManager
 {
+	/**
+    * ctor
+    * @return void
+    */
 	public function __construct()
 	{
 		//run baseManager constructor
@@ -24,7 +28,7 @@ class categoriesManager extends \library\baseManager
 	}
 	
 	/**
-	 * delete
+	 * delete a category
 	 * @param array|int id(s) of the row to deleted
 	 * @return void
 	 */
@@ -71,8 +75,8 @@ class categoriesManager extends \library\baseManager
 	
 	
 	/**
-	* get all categories with count of instances
-	* @return array containing all of the result set rows 
+	* get all categories with count of instances inside
+	* @return array containing all of the result set rows
 	*/
 	public function getAllWithInstancesCount()
 	{

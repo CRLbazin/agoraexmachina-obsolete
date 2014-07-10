@@ -32,12 +32,12 @@ abstract class baseEntity
 	public function hydrate($values)
 	{
 	    if(isset($values))
-		foreach($values as $attr => $val)
-		{
-			$method = 'set'.ucfirst($attr);
-			if(is_callable(array($this, $method)))
-				$this->$method($val);
-		}
+			foreach($values as $attr => $val)
+			{
+				$method = 'set'.ucfirst($attr);
+				if(is_callable(array($this, $method)))
+					$this->$method($val);
+			}
 	}
 	
 	/**

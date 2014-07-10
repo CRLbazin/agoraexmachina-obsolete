@@ -16,6 +16,7 @@ class adminController extends \library\baseController
 
 	/**
 	* index page of the admin module
+	* @return void
 	*/		
 	public function indexAction()
 	{	

@@ -29,6 +29,7 @@ class forumsEntity extends \library\baseEntity
 	/**
 	* setter forumsid
 	* @param int id of the entity
+	* @return void
 	*/
 	public function setForumsId($id)
 	{
@@ -47,6 +48,7 @@ class forumsEntity extends \library\baseEntity
 	/**
 	* setter forumsinstances
 	* @param int instances of the entity
+	* @return void
 	*/
 	public function setForumsInstances($instances)
 	{
@@ -65,6 +67,7 @@ class forumsEntity extends \library\baseEntity
 	/**
 	* setter forumsusers
 	* @param int users of the entity
+	* @return void
 	*/
 	public function setForumsUsers($users)
 	{
@@ -81,36 +84,38 @@ class forumsEntity extends \library\baseEntity
 	}
 
 	/**
-	 * setter forumstitle
-	 * @param string title of the entity
-	 */
+	* setter forumstitle
+	* @param string title of the entity
+	* @return void
+	*/
 	public function setForumsTitle($title)
 	{
 		$this->forumstitle = $title;
 	}
 	
 	/**
-	 * getter forumstitle
-	 * @return string title of the entity
-	 */
+	* getter forumstitle
+	* @return string title of the entity
+	*/
 	public function getForumsTitle()
 	{
 		return $this->forumstitle;
 	}
 
 	/**
-	 * setter forumsanswerstitle
-	 * @param string title of the entity
-	 */
+	* setter forumsanswerstitle
+	* @param string title answer of the entity
+	* @return void
+	*/
 	public function setForumsAnswersTitle($title)
 	{
 		$this->forumsanswerstitle = $title;
 	}
 	
 	/**
-	 * getter forumsanswerstitle
-	 * @return string title of the entity
-	 */
+	* getter forumsanswerstitle
+	* @return string title answer of the entity
+	*/
 	public function getForumsAnswersTitle()
 	{
 		return $this->forumsanswerstitle;
@@ -119,6 +124,7 @@ class forumsEntity extends \library\baseEntity
 	/**
 	* setter forumscreationdate
 	* @param string ceationdate of the entity
+	* @return void
 	*/
 	public function setForumsCreationDate($date)
 	{
@@ -135,18 +141,19 @@ class forumsEntity extends \library\baseEntity
 	}
 
 	/**
-	 * setter forumsanswersid
-	 * @param int id of the entity
-	 */
+	* setter forumsanswersid
+	* @param int forumsanswersid of the entity 
+	* @return void
+	*/
 	public function setForumsAnswersId($id)
 	{
 		$this->forumsanswersid = $id;
 	}
 	
 	/**
-	 * getter forumsanswersid
-	 * @return int forumsanswersid of the entity
-	 */
+	* getter forumsanswersid
+	* @return int forumsanswersid of the entity
+	*/
 	public function getForumsAnswersId()
 	{
 		return $this->forumsanswersid;
@@ -154,18 +161,19 @@ class forumsEntity extends \library\baseEntity
 	
 
 	/**
-	 * setter $forumsanswersusers,
-	 * @param int id of the user
-	 */
+	* setter $forumsanswersusers,
+	* @param int forumsanswersusers of the user
+	* @return void
+	*/
 	public function setForumsAnswersUsers($user)
 	{
 		$this->forumsanswersusers = $user;
 	}
 	
 	/**
-	 * getter forumsanswersusers
-	 * @return int id id the user
-	 */
+	* getter forumsanswersusers
+	* @return int forumsanswersusers the user
+	*/
 	public function getForumsAnswersUsers()
 	{
 		return $this->forumsanswersusers;
@@ -173,18 +181,19 @@ class forumsEntity extends \library\baseEntity
 
 
 	/**
-	 * setter forumanswerscreationdate,
-	 * @param string date of the entity
-	 */
+	* setter forumanswerscreationdate,
+	* @param string forumsanswerscreationdate of the entity
+	* @return void
+	*/
 	public function setForumsAnswersCreationDate($date)
 	{
 		$this->forumsanswerscreationdate = $date;
 	}
 	
 	/**
-	 * getter forumsanswerscreationdate
-	 * @return string date of the entity
-	 */
+	* getter forumsanswerscreationdate
+	* @return string forumsanswerscreationdate of the entity
+	*/
 	public function getForumsAnswersCreationDate()
 	{
 		return $this->forumsanswerscreationdate;
@@ -193,18 +202,19 @@ class forumsEntity extends \library\baseEntity
 
 
 	/**
-	 * setter forumanswersdescr
-	 * @param string descr of the entity
-	 */
+	* setter forumanswersdescr
+	* @param string forumsanswersdescr of the entity
+	* @return void
+	*/
 	public function setForumsAnswersDescr($descr)
 	{
 		$this->forumsanswersdescr = $descr;
 	}
 	
 	/**
-	 * getter forumsanswersdescr
-	 * @return string descr of the entity
-	 */
+	* getter forumsanswersdescr
+	* @return string forumsanswersdescr of the entity
+	*/
 	public function getForumsAnswersDescr()
 	{
 		return $this->forumsanswersdescr;
@@ -212,18 +222,19 @@ class forumsEntity extends \library\baseEntity
 
 
 	/**
-	 * setter forumanswersforums
-	 * @param int id of the entity
-	 */
+	* setter forumanswersforums
+	* @param int forumsanswersforums of the entity
+	* @return void
+	*/
 	public function setForumsAnswersForums($forum)
 	{
 		$this->forumsanswersforums = $forum;
 	}
 	
 	/**
-	 * getter forumsanswersforums
-	 * @return int forumss of the entity
-	 */
+	* getter forumsanswersforums
+	* @return int forumsanswersforums of the entity
+	*/
 	public function getForumsAnswersForums()
 	{
 		return $this->forumsanswersforums;

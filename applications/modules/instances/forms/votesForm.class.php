@@ -19,8 +19,8 @@ class votesForm extends \library\baseFormBuilder
 	public function build()
 	{ 
 		$this->form->add(new \library\webComponents\text(
-		array( 
-			"title" 	=> _TR_Name, 
+		array(
+		    "title" 	=> _TR_Name, 
 			"name" 		=> "name", 
 			"value" 	=> $this->form->getEntity()->getName(), 
 		)));

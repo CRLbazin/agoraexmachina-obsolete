@@ -22,68 +22,73 @@ class instancesForm extends \library\baseFormBuilder
 		
 
 		$this->form->add(new \library\webComponents\text(
-			array( "title" => _TR_Name, 
-			"name" => "name", 
-			"value" => $this->form->getEntity()->getName(), 
-			'validators'	=> array(
-				new \library\validators\notNullValidator("<b>"._TR_Name.'</b> : '._TR_NotNull),
-			)				
+			array( 
+			    "title"      => _TR_Name, 
+			    "name"       => "name", 
+			    "value"      => $this->form->getEntity()->getName(),
+			    "maxlenght"  => "255", 
+			    "validators" => array(
+			        new \library\validators\notNullValidator("<b>"._TR_Name.'</b> : '._TR_NotNull),
+			    )				
 		)));
 	
 		$this->form->add(new \library\webComponents\textarea(
-			array( "title" => _TR_Desc, 
-			"name" => "descr", 
-			"class" => "tinymce",
-			"value" => $this->form->getEntity()->getDescr(), 
-			'validators'	=> array(
-				new \library\validators\notNullValidator("<b>"._TR_Descr.'</b> : '._TR_NotNull),
-			)
+			array( 
+			    "title"      => _TR_Desc, 
+			    "name"       => "descr", 
+			    "class"      => "tinymce",
+			    "value"      => $this->form->getEntity()->getDescr(), 
+			    "validators" => array(
+			        new \library\validators\notNullValidator("<b>"._TR_Descr.'</b> : '._TR_NotNull),
+			    )
 		)));
 	
 		$this->form->add(new \library\webComponents\image(
-			array( "title" => _TR_Image, 
-			"name" => "image", 
-			"value" => $this->form->getEntity()->getImage(),
-			"readonly"	=> "readonly", 
-			'validators'	=> array(
-				new \library\validators\notNullValidator("<b>"._TR_Descr.'</b> : '._TR_NotNull),
-			)
+			array(
+			    "title"      => _TR_Image, 
+			    "name"       => "image", 
+			    "value"      => $this->form->getEntity()->getImage(),
+			    "readonly"   => "readonly", 
+                "validators" => array(
+                	new \library\validators\notNullValidator("<b>"._TR_Descr.'</b> : '._TR_NotNull),
+                )
 		)));
 	
 		$this->form->add(new \library\webComponents\datepicker(
-			array( "title" => _TR_Deadline, 
-			"name" => "deadline", 
-			"value" => $this->form->getEntity()->getdeadline(), 
-			'validators'	=> array(
-				new \library\validators\notNullValidator("<b>"._TR_Date.'</b> : '._TR_NotNull),
-			)
+			array( 
+			    "title"          => _TR_Deadline, 
+			    "name"           => "deadline", 
+			    "value"          => $this->form->getEntity()->getdeadline(), 
+			    "validators"     => array(
+			        new \library\validators\notNullValidator("<b>"._TR_Date.'</b> : '._TR_NotNull),
+			    )
 		)));
 		
 		$this->form->add(new \library\webComponents\hidden(
-				array(
-						"title" 	=> _TR_Id,
-						"name" 		=> "id",
-						"readonly" 	=> "readonly",
-						"value" 	=> $this->form->getEntity()->getId(),
-				)
+		    array(
+		        "title" 	=> _TR_Id,
+		        "name" 		=> "id",
+		        "readonly" 	=> "readonly",
+		        "value" 	=> $this->form->getEntity()->getId(),
+		        )
 		));
 		
 		$this->form->add(new \library\webComponents\hidden(
-				array(
-						"title" 	=> _TR_Categories,
-						"name" 		=> "categories",
-						"readonly" 	=> "readonly",
-						"value" 	=> $this->form->getEntity()->getCategories(),
-				)
+		    array(
+		        "title" 	=> _TR_Categories,
+		        "name" 		=> "categories",
+		        "readonly" 	=> "readonly",
+		        "value" 	=> $this->form->getEntity()->getCategories(),
+		        )
 		));
 		
 		$this->form->add(new \library\webComponents\hidden(
-				array(
-						"title" 	=> _TR_Users,
-						"name" 		=> "users",
-						"readonly" 	=> "readonly",
-						"value" 	=> $this->form->getEntity()->getUsers(),
-				)
+		    array(
+		        "title" 	=> _TR_Users,
+		        "name" 		=> "users",
+		        "readonly" 	=> "readonly",
+		        "value" 	=> $this->form->getEntity()->getUsers(),
+		        )
 		));
 		
 		

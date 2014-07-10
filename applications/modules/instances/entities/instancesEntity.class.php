@@ -25,6 +25,7 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	/**
 	* setter id
 	* @param int id of the entity
+	* @return void
 	*/
 	public function setId($id)
 	{
@@ -41,7 +42,8 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	}
 	/**
 	* setter name
-	* @param varchar name of the entity
+	* @param string name of the entity
+	* @return void
 	*/
 	public function setName($name)
 	{
@@ -50,7 +52,7 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 
 	/**
 	* getter name
-	* @return varchar name of the entity
+	* @return string name of the entity
 	*/
 	public function getName()
 	{
@@ -58,7 +60,8 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	}
 	/**
 	* setter descr
-	* @param varchar descr of the entity
+	* @param string description of the entity
+	* @return void
 	*/
 	public function setDescr($descr)
 	{
@@ -67,7 +70,7 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 
 	/**
 	* getter descr
-	* @return varchar descr of the entity
+	* @return string description of the entity
 	*/
 	public function getDescr()
 	{
@@ -75,7 +78,8 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	}
 	/**
 	* setter image
-	* @param text image of the entity
+	* @param string image name of the entity
+	* @return void
 	*/
 	public function setImage($image)
 	{
@@ -84,7 +88,7 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 
 	/**
 	* getter image
-	* @return text image of the entity
+	* @return string image name of the entity
 	*/
 	public function getImage()
 	{
@@ -92,7 +96,8 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	}
 	/**
 	* setter deadline
-	* @param text deadline of the entity
+	* @param string deadline of the entity
+	* @return void
 	*/
 	public function setdeadline($deadline)
 	{
@@ -101,7 +106,7 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 
 	/**
 	* getter deadline
-	* @return text deadline of the entity
+	* @return string deadline of the entity
 	*/
 	public function getdeadline()
 	{
@@ -110,6 +115,7 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	/**
 	* setter users
 	* @param int users of the entity
+	* @return void
 	*/
 	public function setUsers($users)
 	{
@@ -127,6 +133,7 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	/**
 	* setter categories
 	* @param int categories of the entity
+	* @return void
 	*/
 	public function setCategories($categories)
 	{

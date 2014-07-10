@@ -15,6 +15,10 @@ use applications\modules\instances\entities;
 */
 class instancesManager extends \library\baseManager
 {
+    /**
+    * ctor
+    * @return void
+    */
 	public function __construct()
 	{
 		//run baseManager constructor
@@ -25,8 +29,9 @@ class instancesManager extends \library\baseManager
 	
 	/**
 	 * delete
-	 * execute a query "delete" with a filter on id
-	 * @param int id of the row to deleted
+	 * delete instance(s) 
+	 * @param array|int id of the row to deleted
+	 * @return void
 	 */
 	public function delete($values)
 	{
@@ -40,10 +45,9 @@ class instancesManager extends \library\baseManager
 	
 	
 	/**
-	* get an object by categories
-	* execute a query "select" with a filter on categories
-	* @param array|string name or list of names to filter the query 
-	* @return pdo_object anonymous object with property names that correspond to the column names returned in result set
+	* get instances by categories
+	* @param array|int id of the categorie(s)
+	* @return array containing all of the result set rows
 	*/
 	public function getByCategories($categories)
 	{
@@ -64,8 +68,9 @@ class instancesManager extends \library\baseManager
 	
 	
 	/**
-	* add or update a instances
-	* @param entity instances
+	* save an instance
+	* @param \applications\modules\instances\entities\instancesEntity $instances
+	* @return boolean
 	*/
 	public function save(\applications\modules\instances\entities\instancesEntity $instances )
 	{
@@ -100,10 +105,9 @@ class instancesManager extends \library\baseManager
 		$req->bindValue(":categories", $instances->getCategories());
 		
 		
-		if(!$req->execute())
-			return false;
-		else
-			return true ;
+		return $req->execute() ? true : false;
 	}
+	
+	
 }
 ?>

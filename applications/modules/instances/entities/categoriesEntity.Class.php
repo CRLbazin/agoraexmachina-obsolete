@@ -21,6 +21,7 @@ class categoriesEntity extends \library\baseEntity
 	/**
 	* setter id
 	* @param int id of the entity
+	* @return void
 	*/
 	public function setId($id)
 	{
@@ -38,6 +39,7 @@ class categoriesEntity extends \library\baseEntity
 	/**
 	* setter name
 	* @param varchar name of the entity
+	* @return void
 	*/
 	public function setName($name)
 	{

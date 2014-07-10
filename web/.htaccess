@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 	
+	#remove PHPSESSID
+
+	RewriteCond %{QUERY_STRING} PHPSESSID=.*$
+	RewriteRule .* %{REQUEST_URI}? [R=301,L]
 	RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ app.php [QSA,L]
 </IfModule>

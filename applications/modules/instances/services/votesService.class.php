@@ -9,6 +9,7 @@
 namespace applications\modules\instances\services;
 
 use library\baseManager;
+
 /**
 * instances votes services
 */
@@ -18,9 +19,9 @@ class votesService extends \library\baseService
     protected   $currentEntity;
     
    /**
-   * add an instance
+   * add a vote 
    * @param \applications\modules\instances\entities\votesEntity $votes
-   * @return void
+   * @return boolean
    */
     public function add(\applications\modules\instances\entities\votesEntity $votes)
     {
@@ -42,7 +43,7 @@ class votesService extends \library\baseService
     * @param int id of the vote
     * @param int id of the current user
     * @param int id of the voter decision
-    * @return void
+    * @return boolean
     */
     public function vote($id, $users, $result)
     {
@@ -58,10 +59,27 @@ class votesService extends \library\baseService
     	return $this->currentManager->saveVotesusers($votesusersEntity);
     }
     
+    /**
+    * check if the user already make a vote
+    * @param int id of the vote
+    * @param int id of the $user
+     */
     public function checkAlreadyVote($id, $user)
     {
     	return $this->currentManager->getByVoteAndUser($id, $user);
     } 
+    
+    
+    /**
+    * get all votes for an instance
+    * @param int id of the instance
+    * @param int id of the currentUser
+    * @return array containing all of the result set rows
+    */
+    public function getByInstances($instance, $currentUser=0)
+    {
+        return $this->currentManager->getByInstances($instance, $currentUser);
+    }
   
 }
 

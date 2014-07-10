@@ -52,6 +52,7 @@
 	<translate var="_TR_Deadline" value="Date de fin" />
 	<translate var="_TR_Help" value="Aide" />
 	<translate var="_TR_Actions" value="Actions" />
+	<translate var="_TR_Informations" value="Informations" />
 	
 	
 	<!--  users module -->
@@ -108,4 +109,19 @@
 	<translate var="_TR_UserUpdateSuccessfully" value="Utilisateur mis à jour avec succès" />
 	<translate var="_TR_MustBeConnectedForInstanceAction" value="Vous devez être connecté pour pouvoir intervenir dans un atelier.[br][br]Utilisez le bouton 'se connecter' en haut à droite pour vous connecter ou créer un compte." />
 	<translate var="_TR_voteConsidered" value="Vote pris en compte" />
+	<translate var="_TR_AddDelegation" value="Donner une délégation" />
+	<translate var="_TR_Users1" value="De l'utilisateur" />
+	<translate var="_TR_Users2" value="Vers l'utilisateur" />
+	<translate var="_TR_DelegationAddSuccessfully" value="Délégation ajoutée avec succès" />
+	<translate var="_TR_DelegationGivenTo" value="Délégation donnée à " />
+	<translate var="_TR_DeleteDelegation" value="Retirer la délégation" />
+	<translate var="_TR_DelegationDeletedError" value="Erreur lors de la suppression de la délégation" />
+	<translate var="_TR_DelegationDeletedSuccessfully" value="Suppression de la délégation réalisée avec succès" />
+	<translate var="_TR_DelegationReceiveFrom" value="Délégation reçue de " />
+	<translate var="_TR_NoDelegationReceive" value="Aucune délégation reçue" />
+	<translate var="_TR_ChooseADelegation" value="Vous disposez d'une ou plusieurs délégations. Voulez vous voter pour une personne qui vous déléguer sa voix ?" />
+	<translate var="_TR_You" value="Vous même" />
+	<translate var="_TR_VoteConfirm" value="Etes-vous sur de vouloir faire ce vote ?" />
+	<translate var="_TR_CategoriesSuccessfullyUpdate" value="thème mis à jour avec succès." />
+	<translate var="_TR_CategoriesSuccessfullyCreate" value="Thème créé avec succès." />
 </translations>

@@ -23,6 +23,7 @@ class votesEntity extends \library\baseEntity
 	/**
 	* setter id
 	* @param int id of the entity
+	* @return void
 	*/
 	public function setId($id)
 	{
@@ -41,6 +42,7 @@ class votesEntity extends \library\baseEntity
 	/**
 	* setter instances
 	* @param int instances of the entity
+	* @return void
 	*/
 	public function setInstances($instances)
 	{
@@ -59,6 +61,7 @@ class votesEntity extends \library\baseEntity
 	/**
 	* setter users
 	* @param int users of the entity
+	* @return void
 	*/
 	public function setUsers($users)
 	{
@@ -77,6 +80,7 @@ class votesEntity extends \library\baseEntity
 	/**
 	* setter name
 	* @param string name of the entity
+	* @return void
 	*/
 	public function setName($name)
 	{
@@ -93,7 +97,8 @@ class votesEntity extends \library\baseEntity
 	}
 	/**
 	* setter descr
-	* @param text descr of the entity
+	* @param string description of the entity
+	* @return void
 	*/
 	public function setDescr($descr)
 	{
@@ -102,7 +107,7 @@ class votesEntity extends \library\baseEntity
 
 	/**
 	* getter descr
-	* @return text descr of the entity
+	* @return string description of the entity
 	*/
 	public function getDescr()
 	{

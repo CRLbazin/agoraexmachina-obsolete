@@ -66,6 +66,13 @@ V0.7.1 #Seerawyer
 * Correction des bugs remontés par Seeraiwer
 
 
+V0.8 #Higuana
+---------------
+* Mise en place du système de délégation sur les thèmes et ateliers
+* Ajout du lien github dans le pied de page
+* Technique : Suppression de l'accès aux managers depuis les controlleurs
+  
+
 
 
 

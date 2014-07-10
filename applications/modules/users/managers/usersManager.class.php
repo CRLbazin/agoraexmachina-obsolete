@@ -130,10 +130,10 @@ class usersManager extends \library\baseManager
 	
 
 	/**
-	 * get a user by an email
-	 * @param string email of the user
-	 * @return mixed
-	 */
+	* get a user by an email
+	* @param string email of the user
+	* @return mixed
+	*/
 	public function getByEmail($email)
 	{
 		$req = $this->db->query("SELECT id, name, password, email, level FROM users WHERE email = '".secureString($email)."'");
@@ -143,6 +143,34 @@ class usersManager extends \library\baseManager
 			return $res ;
 		else
 			return false;
+	}
+	
+	
+	/**
+	* get all active users
+	* @return mixed false or array of object contains all rows
+	*/
+	public function getAllActiveUsers($excepts = null)
+	{
+	    $query = "SELECT id, name, password, email, level, active FROM users WHERE active = 1";
+	    if($excepts)
+	    {
+	        if(is_array($excepts))
+	            foreach($excepts as $value)
+	            $query .= " and id != ".$value;
+	        else
+	            $query .= " and id != ".$excepts;
+	    }
+	    
+	    
+		$req = $this->db->query($query);
+		$res = $req->fetchAll(\PDO::FETCH_OBJ);
+	
+		if(sizeof($res) >= 1)
+			return $res ;
+		else
+			return false;
+		
 	}
 }
 ?>

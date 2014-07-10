@@ -20,15 +20,12 @@ class categoriesController extends \library\baseController
 	*/
 	public function adminAction()
 	{	
-		//get the categories manager
-		$this->categoriesManager = $this->baseManager->getManagerOf('instances\categories');
-		
 		//get the admin component
 		$listAdmin = new \library\webComponents\listAdmin(array(
 			'module'	=> 'categories',
 			'title'		=> "Administration des th&egrave;mes",
 			'columns'	=> array(_TR_Name),
-			'data'		=> $this->currentManager->getAll(array("id", "name"))
+			'data'		=> $this->currentService->getAll(array("id", "name"))
 		));
 		
 		$this->page->addVar('listAdmin', $listAdmin->build());
@@ -46,8 +43,8 @@ class categoriesController extends \library\baseController
 		$form = $formBuilder->getForm();
 		if($request->isPosted() && $form->isValid())
 		{
-			$this->currentManager->save($this->currentEntity);
-			$this->page->addVar('msgSuccess', "th&egrave;me mis &agrave; jour avec succ&egrave;s");
+			$this->currentService->edit($this->currentEntity);
+			$this->page->addVar('msgSuccess', _TR_CategoriesSuccessfullyUpdate);
 		}
 		
 		$this->page->addVar('form', $form->createView());			
@@ -66,8 +63,8 @@ class categoriesController extends \library\baseController
 		$form = $formBuilder->getForm();
 		if($request->isPosted() && $form->isValid())
 		{
-			$this->currentManager->save($this->currentEntity);
-			$this->page->addVar('msgSuccess', "th&egrave;me mis &agrave; jour avec succ&egrave;s");
+			$this->currentService->add($this->currentEntity);
+			$this->page->addVar('msgSuccess', _TR_CategoriesSuccessfullyCreate);
 		}
 		
 		$this->page->addVar('form', $form->createView());		

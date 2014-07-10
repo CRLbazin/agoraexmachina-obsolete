@@ -20,16 +20,19 @@ class categoriesForm extends \library\baseFormBuilder
 	public function build()
 	{ 
 		$this->form->add(new \library\webComponents\text(
-			array( "title" => "id", 
-			"name" => "id", 
-			"readonly" => "readonly",
-			"value" => $this->form->getEntity()->getId(), 
+			array( 
+			    "title"      => "id", 
+			    "name"       => "id", 
+			    "readonly"   => "readonly",
+			    "value"      => $this->form->getEntity()->getId(), 
 		)));
 
 		$this->form->add(new \library\webComponents\text(
-			array( "title" => _TR_Name, 
-			"name" => "name", 
-			"value" => $this->form->getEntity()->getName(), 
+			array( 
+			    "title"  => _TR_Name, 
+			    "name"   => "name", 
+			    "maxLength"  => "50",
+			    "value"  => $this->form->getEntity()->getName(), 
 		)));
 
 	}

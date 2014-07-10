@@ -1,9 +1,26 @@
-body
+html, body
 {
 	color : #606060;
+	height: 100%;
 }
 
 a:hover
 {
 	text-decoration : none;
+}
+
+.footer, .push 
+{
+	padding : 50px 0px;
+	height	: 155px; /* .push must be the same height as .footer */ 
+	
+}
+
+
+.content
+{
+	min-height	: 100%;
+	height		: auto !important;
+	height		: 100%;
+	margin		: 0 auto -4em;
 }

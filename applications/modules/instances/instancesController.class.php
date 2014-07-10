@@ -13,6 +13,32 @@ namespace applications\modules\instances;
 */
 class instancesController extends \library\baseController
 {
+	
+	/**
+	* ctor
+	* @return void
+	*/
+	public function __construct(\library\application $application, $module, $action)
+	{
+		parent::__construct($application, $module, $action);
+		
+		//delegations
+		if(isset($_SESSION['users']))
+		{
+			$delegationService = new \applications\modules\instances\services\delegationsService();
+			unset($_SESSION['delegation']);
+			$_SESSION['delegations']['categories'] = $delegationService->getDelegationGivenForCategories($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id);
+			$_SESSION['delegations']['instances'] = $delegationService->getDelegationGivenForInstances($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id);
+			$_SESSION['delegations']['receiveForCategories'] = $delegationService->getDelegationReceiveForCategories($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id);
+			$_SESSION['delegations']['receiveForInstances'] = $delegationService->getDelegationReceiveForInstances($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id, $this->application->getHttpRequest()->getGET('categories'));
+			
+		}	
+	}
+	
+	
+	
+	
+	
 
 	/**
 	* index page 
@@ -21,10 +47,12 @@ class instancesController extends \library\baseController
 	*/
 	public function indexAction(\library\httpRequest $request)
 	{		
-		$categoriesManager = $this->baseManager->getManagerOf('instances\categories');
-		$this->page->addVar('categories', $categoriesManager->getById($request->getGET('id')));
+		$categoriesService = new \applications\modules\instances\services\categoriesService();
+		$this->page->addVar('categories', $categoriesService->getById($request->getGET('id')));
 		
-		$this->page->addVar('instances', $this->currentManager->getByCategories($request->getGET('id')));
+		$this->page->addVar('instances', $this->currentService->getByCategories($request->getGET('id')));
+
+		
 	}
 	
 	/**
@@ -52,8 +80,6 @@ class instancesController extends \library\baseController
 			
 		$this->page->addVar('form', $form->createView());
 		
-		
-		
 	}
 	
 	
@@ -68,21 +94,26 @@ class instancesController extends \library\baseController
 		$currentUser = isset($_SESSION['users']) ? $_SESSION['users']->id : 0;
 		
 		//get categories and votes		
-		$categories = $this->baseManager->getManagerOf('instances\categories')->getById($request->getGET('categories'));
-		$votes = $this->baseManager->getManagerOf('instances\votes')->getByInstances($request->getGET('id'), $currentUser);
-		$forumsManager = $this->baseManager->getManagerOf('instances\forums');
-		$forums = $forumsManager->getByInstances($request->getGET('id'));
-		$forumsanswers = $forumsManager->getByInstancesWithAnswers($request->getGET('id'));
+		$categories = $this->getServiceOf('instances\categories')->getById($request->getGET('categories'));
+		$votes = $this->getServiceOf('instances\votes')->getByInstances($request->getGET('id'), $currentUser);
+		$forums = $this->getServiceOf('instances\forums')->getByInstances($request->getGET('id'));
+		$forumsanswers = $this->getServiceOf('instances\forums')->getByInstancesWithAnswers($request->getGET('id'));
 		
+			
 		$this->page->addVar('instances', $this->currentEntity);
 		$this->page->addVar('categories', $categories);
 		$this->page->addVar('votes', $votes);
 		$this->page->addVar('forums', $forums);
 		$this->page->addVar('forumsanswers', $forumsanswers);
-		
-		
+			
 	}
 	
+	
+	/**
+	* edit an instance
+	* @param \library\httpRequest $request
+	* @return void
+	*/
 	public function editAction(\library\httpRequest $request)
 	{
 		$this->page->setLayout('modal');
@@ -100,19 +131,19 @@ class instancesController extends \library\baseController
 		
 	}
 	
-	
+	/**
+	* delete an instance
+	* @param \library\httpRequest $request
+	* @return void
+	*/
 	public function deleteAction(\library\httpRequest $request)
 	{		
-		//get linked object manager
-		$votesManager = $this->baseManager->getManagerOf('instances\votes');
-		
-		//delete action
-		$this->currentManager->delete($request->getGET('instances'));	
-		$votesManager->delete(array('instances' => $request->getGET('instances')));
-		
-		//show message success
-		$this->page->addVar('msgSuccess', _TR_elementsDeleted);
+		if($this->currentService->delete($request->getGET('instances')))
+			$this->page->addVar('msgSuccess', _TR_elementsDeleted);
 	}
+	
+	
+
 	
 	
 }

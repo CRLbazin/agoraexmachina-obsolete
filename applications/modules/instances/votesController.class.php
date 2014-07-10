@@ -13,7 +13,7 @@ namespace applications\modules\instances;
 */
 class votesController extends \library\baseController
 {
-
+	
 	/**
 	 * add a vote
 	 * @param \library\httpRequest $request
@@ -85,21 +85,25 @@ class votesController extends \library\baseController
 	*/
 	public function voteAction(\library\httpRequest $request)
 	{
-		
-		
 		$this->page->setLayout('modal');
 		
-		if($request->getGET('vote') == "voteFor") {$result = 1;}
-		if($request->getGET('vote') == "voteAgainst") {$result = -1;}
-		if($request->getGET('vote') == "voteWhite") {$result = 0;} 
-		
+		//test if user is already connected
 		if(isset($_SESSION['users']))
 		{
-			if($this->currentService->vote($request->getGET('id'), $_SESSION['users']->id, $result))
-				$this->page->addVar('msgSuccess', _TR_voteConsidered);
-		}
-		else
+			//get vote
+			if($request->getGET('vote') == "voteFor") {$result = 1;}
+			if($request->getGET('vote') == "voteAgainst") {$result = -1;}
+			if($request->getGET('vote') == "voteWhite") {$result = 0;}
+			
+			
+			//check if a user is is posted for the vote
+			if($request->getData('userDelegationVote') != "")
+				if($this->currentService->vote($request->getGET('id'), $request->getData('userDelegationVote'), $result))
+					$this->page->addVar('msgSuccess', _TR_voteConsidered);
+		}		
+		 else
 			$this->page->addVar('msgError', _TR_MustBeConnected);
+	
 	}
 	
 	

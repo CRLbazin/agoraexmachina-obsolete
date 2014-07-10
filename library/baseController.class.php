@@ -20,8 +20,6 @@ abstract class baseController
 	protected	$action = '';
 	protected	$view;
 	protected	$viewFile;
-	protected	$baseManager; 
-	protected	$currentManager;
 	protected	$currentEntity;
 	protected   $currentService;
 	protected	$formAction;
@@ -39,7 +37,6 @@ abstract class baseController
 	public function __construct(\library\application $application, $module, $action)
 	{
 		$this->page = new page();
-		$this->baseManager = new baseManager();
 		$this->breadcrumb = new breadcrumb();	
 			
 		$this->application = $application;
@@ -51,8 +48,6 @@ abstract class baseController
 		
 		preg_match_all('/([\w]*)\\\([\w]*)$/', $this->module, $modules);
 		
-		$this->currentManager = $this->baseManager->getManagerOf($module);
-			
 		
 		if(!isset($modules[1][0]))
 		{
@@ -65,15 +60,18 @@ abstract class baseController
 			$currentServicePath = "\\applications\\modules\\".$modules[1][0]."\\services\\".$modules[2][0]."Service";
 		}
 		
-		
+
+		if(class_exists($currentServicePath ))
+		    $this->currentService = new $currentServicePath();
 		
 		
 		if(class_exists($currentEntityPath))
 		{
 			$this->currentEntity = new $currentEntityPath();
 			
+			//auto hydrate entity
 			if(!$this->application->getHttpRequest()->isPosted() && $this->application->getHttpRequest()->getGET('id') <> "")
-				$this->currentEntity->hydrate($this->currentManager->getById($this->application->getHttpRequest()->getGET('id')));
+				$this->currentEntity->hydrate($this->currentService->getById($this->application->getHttpRequest()->getGET('id')));
 			else
 				$this->currentEntity->hydrate($this->application->getHttpRequest()->getPOST());
 		}
@@ -82,8 +80,6 @@ abstract class baseController
 		if(isset($_FILES['image']))
     			$this->currentEntity->setImage($_FILES['image']['name']);
 		
-		if(class_exists($currentServicePath ))
-			$this->currentService = new $currentServicePath();
 	}
 	
 
@@ -183,10 +179,37 @@ abstract class baseController
 			'module'	=> $this->listAdmin['module'],
 			'title'		=> $this->listAdmin['title'],
 			'columns'	=> $this->listAdmin['columns'],
-			'data'		=> $this->currentManager->getAll($this->listAdmin['data'])
+			'data'		=> $this->currentService->getAll($this->listAdmin['data'])
 		));
 		$this->page->addVar('listAdmin', $listAdminComponent->build());
 		
+	}
+	
+	
+	/**
+	 * get the service of a module
+	 * @param string name of the module
+	 * @return object service of the module
+	 */
+	public function getServiceOf($module)
+	{
+	    if(!is_string($module) || empty($module))
+	        throw new \InvalidArgumentException('Le service spécifié est vide');
+	    else
+	    {
+	        preg_match_all('/([\w]*)\\\([\w]*)$/', $module, $modules);
+	        	
+	        if(!isset($modules[1][0]))
+	            $service = "\\applications\\modules\\".$module."\\services\\".$module."Service";
+	        else
+	            $service = "\\applications\\modules\\".$modules[1][0]."\\services\\".$modules[2][0]."Service";
+	        	
+	        
+	        if(class_exists($service))
+	            return new $service();
+	    }
+	
+	    return false;
 	}
 	
 	

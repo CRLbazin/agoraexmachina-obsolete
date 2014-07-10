@@ -9,6 +9,7 @@
 namespace applications\modules\instances\services;
 
 use library\baseManager;
+
 /**
 * instances forums services
 */
@@ -20,7 +21,7 @@ class forumsService extends \library\baseService
     /**
      * add a forum
      * @param \applications\modules\instances\entities\forumsEntity $forum
-     * @return void
+     * @return boolean
      */
     public function add(\applications\modules\instances\entities\forumsEntity $forum)
     {
@@ -30,7 +31,7 @@ class forumsService extends \library\baseService
     /**
      * add an answers
      * @param \applications\modules\instances\entities\forumsEntity $forum
-     * @return void
+     * @return boolean
      */
     public function addAnswers(\applications\modules\instances\entities\forumsEntity $forum)
     {
@@ -45,6 +46,28 @@ class forumsService extends \library\baseService
     public function delete($id)
     {
     	return ($this->currentManager->delete($id)) ? true : false;
+    }
+    
+    
+    /**
+    * get all forums for an instance
+    * @param int id of the instance
+    * @return array containing all of the result set rows
+    */
+    public function getByInstances($instance)
+    {
+        return $this->currentManager->getByInstances($instance);
+    }
+    
+    
+    /**
+     * get all forums and answers for an instance
+     * @param int id of the instance
+     * @return array containing all of the result set rows
+     */
+    public function getByInstancesWithAnswers($instance)
+    {
+        return $this->currentManager->getByInstancesWithAnswers($instance);
     }
     
     

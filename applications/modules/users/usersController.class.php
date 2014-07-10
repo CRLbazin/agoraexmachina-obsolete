@@ -28,7 +28,7 @@ class usersController extends \library\baseController
 			'module'	=> 'users',
 			'title'		=> "Administration des utilisateurs",
 			'columns'	=> array( _TR_Name, _TR_Email, _TR_Active, _TR_CreationDate),
-			'data'		=> $this->currentManager->getAll(array("id", "name", "email", "active", "creationDate"))
+			'data'		=> $this->currentService->getAll(array("id", "name", "email", "active", "creationDate"))
 		));
 		
 		$this->page->addVar('listAdmin', $listAdmin->build());

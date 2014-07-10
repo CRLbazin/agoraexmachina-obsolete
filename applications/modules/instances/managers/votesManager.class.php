@@ -11,10 +11,13 @@ use applications\modules\instances\entities;
 
 /**
 * votes manager
-* @version 1.0
 */
 class votesManager extends \library\baseManager
 {
+    /**
+    * ctor
+    * @return void
+    */
 	public function __construct()
 	{
 		//run baseManager constructor
@@ -25,24 +28,23 @@ class votesManager extends \library\baseManager
 	
 	
 	/**
-	 * delete
-	 * execute a query "delete" with a filter on id
+	 * delete a vote
 	 * @param int id of the row to deleted
+	 * @return void
 	 */
 	public function delete($values)
 	{
-		if(is_array($values))
-		foreach($values as $key=>$value)
-			$this->db->exec("DELETE FROM votes WHERE ".$key ." = '".$value."'");
-		else
-			$this->db->exec("DELETE FROM votes WHERE id = '".$values."'");
+		$this->db->exec("DELETE FROM votes WHERE id = '".$values."'");
+		$this->db->exec("DELETE FROM votesusers WHERE votes = '".$values."'");
 			
 	}
 	
 
+	
 	/**
-	* add or update a votes
-	* @param entity votes
+	* save a vote
+	* @param \applications\modules\instances\entities\votesEntity $votes
+	* @return boolean
 	*/
 	public function save(\applications\modules\instances\entities\votesEntity $votes )
 	{
@@ -78,9 +80,10 @@ class votesManager extends \library\baseManager
 	}
 	
 	/**
-	* get all votes of an instance
+	* get all votes for an instance
 	* @param int id of the instance
-	* @return array PDOStatement::fetchAll
+	* @param int id of the currentUser
+	* @return array containing all of the result set rows
 	*/
 	public function getByInstances($instance, $currentUser=0)
 	{
@@ -109,7 +112,7 @@ class votesManager extends \library\baseManager
 	
 	
 	/**
-	* get a vote with id of the vote and a user
+	* get vote result by a vote and a user
 	* @param int id of the vote
 	* @param int id of the user
 	* @return multitype:|boolean

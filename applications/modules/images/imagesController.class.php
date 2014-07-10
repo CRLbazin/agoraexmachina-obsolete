@@ -24,7 +24,6 @@ class imagesController extends \library\baseController
 		// define the layout
 		$this->page->setLayout('none');
 		
-		// send variables to the view
 		$this->page->addVar('path', $request->getGET('path'));
 	}
 	

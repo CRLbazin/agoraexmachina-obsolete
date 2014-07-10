@@ -20,19 +20,16 @@ class homeController extends \library\baseController
 	*/
 	public function indexAction()
 	{
-		$this->page->setLayout("front");
-		$categoriesManager = $this->baseManager->getManagerOf('instances\categories');
-		$this->page->addVar('categories', $categoriesManager->getAllWithInstancesCount());
+		$categoriesService = new \applications\modules\instances\services\categoriesService();
+		$this->page->addVar('categories', $categoriesService->getAllWithInstancesCount());
 		
 	}
 	
 	/**
-	* 404 action
+	* 404 action redirect
 	* @return void
 	*/
-	public function redirect404Action()
-	{
-	}
+	public function redirect404Action(){}
 }
 
 ?>

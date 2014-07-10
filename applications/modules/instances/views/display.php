@@ -38,7 +38,19 @@
 		<div class="alert alert-warning">
 			<strong><?php echo _TR_Help ?></strong> <?php echo _TR_InstancesDisplayHelp ?>
 		</div>
+		
 		<br />
+		<?php
+		if(isset($_SESSION['delegations']['receiveForInstances']))
+		{
+			echo '<div class="alert bg-lightMauve">
+				<span class="glyphicon glyphicon-ok"></span>&nbsp;';
+			echo _TR_DelegationReceiveFrom ;
+			foreach($_SESSION['delegations']['receiveForInstances'] as $value)
+				echo $value->users1Name.", ";
+			echo '</div>';
+		}
+		?>
 		
 		<?php
 		if(isset($_SESSION['users']))
@@ -65,12 +77,48 @@
 			<div id="forumActions" style="display:none;">
 				<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>-<?php echo url($instances->getName())	 ?>/forums/add" class="btn btn-primary "><span class="glyphicon glyphicon-plus"></span> Ajouter un sujet</a>
 			</div>
+			<br />
 			<?php 
+			//delete delegation button
+			if(isset($_SESSION['delegations']['instances']))
+			{
+				?>
+				<div class="btn-group">
+					<span class="btn btn-mauve cursor-pointer">
+				  		<span class='glyphicon glyphicon glyphicon-user'></span>
+				  		<?php echo _TR_DelegationGivenTo."<br />".$_SESSION['delegations']['instances']->users2Name; ?>
+					</span>
+					<button type="button" class="btn btn-mauve dropdown-toggle" data-toggle="dropdown" >
+				    	<span class="caret"></span>
+				    	<span class="sr-only">Toggle Dropdown</span>
+				    </button>
+					  <ul class="dropdown-menu" role="menu">
+					    	<li>
+					    		<a data-toggle="modal" data-target="#myModal"  id="addInstanceButton" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>/deleteDelegation">
+					    			<span class='glyphicon glyphicon-remove'></span> 
+					    			<?php echo _TR_DeleteDelegation; ?>
+					    		</a>
+					    	</li>
+					  </ul>
+				 </div>
+				<?php					
+			}
+			//add delegation button
+			else
+			{
+				?>
+				<a class="btn btn-mauve"  data-toggle="modal" data-target="#myModal"  id="addInstanceButton" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>/addDelegation">
+					<span class='glyphicon glyphicon glyphicon-user'></span>
+					<?php echo _TR_AddDelegation ?>
+				</a>
+				<?php 
+			} 
 		}
 		else
 		{
 			echo msgAlert(_TR_MustBeConnectedForInstanceAction);
 		}
 		?>
+		
 	</div>
 </div>

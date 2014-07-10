@@ -15,7 +15,7 @@ class forumsController extends \library\baseController
 {
 
 	/**
-	 * add a forums
+	 * add a forum
 	 * @param \library\httpRequest $request
 	 * @return void
 	 */
@@ -95,7 +95,7 @@ class forumsController extends \library\baseController
 		$this->page->setLayout('modal');
 		
 		//complete currentEntity		
-		$this->currentEntity->hydrate($this->currentManager->getAnswersById($request->getGET('id')));
+		$this->currentEntity->hydrate($this->currentService->getAnswersById($request->getGET('id')));
 		if($request->isPosted())
 		{ 
 			$this->currentEntity->setForumsAnswersTitle($request->getData('forumsanswerstitle'));
@@ -114,7 +114,7 @@ class forumsController extends \library\baseController
 	}
 	
 	/**
-	* delete an element
+	* delete a forum
 	* @param \library\httpRequest $request
 	* @return void
 	*/

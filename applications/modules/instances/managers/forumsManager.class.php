@@ -14,6 +14,10 @@ use applications\modules\instances\entities;
 */
 class forumsManager extends \library\baseManager
 {
+	/**
+    * ctor
+    * @return void
+    */
 	public function __construct()
 	{
 		//run baseManager constructor
@@ -86,7 +90,7 @@ class forumsManager extends \library\baseManager
 	}
 
 	/*
-	* save a forum (forums and answers)
+	* save a forum (forums entity and answers entity)
 	* @param \applications\modules\instances\entities\forumsEntity $forum
 	* @return boolean
 	*/
@@ -107,7 +111,7 @@ class forumsManager extends \library\baseManager
 	}
 
 	/**
-	* add or update forums
+	* save forum (called by save method)
 	* @param \applications\modules\instances\entities\forumsEntity $forum
 	* @return boolean
 	*/
@@ -144,7 +148,7 @@ class forumsManager extends \library\baseManager
 	
 	
 	/**
-	* add or update forums answers
+	* save answers (called by save method)
 	* @param \applications\modules\instances\entities\forumsEntity $forum
 	* @return boolean
 	*/
@@ -218,11 +222,11 @@ class forumsManager extends \library\baseManager
 	
 	
 	/**
-	* delete an element 
+	* delete answer(s) (and the forum if zero answer left)
 	* @param array|int id or list of id to delete
 	* @return void
 	*/
-	public function delete($values)
+	public function deleteAnswers($values)
 	{	
 		$answers = $this->getAnswersById($values);
 		
@@ -236,10 +240,18 @@ class forumsManager extends \library\baseManager
 		
 		$res = $this->getByInstancesWithAnswers($answers->forumsinstances);
 		if($res[0]->answersid == "")
-		{
 			$this->db->exec("DELETE FROM forums WHERE id = '".$answers->forumsid."'");
-		}
 		
+	}
+	
+	/**
+	* delete a topic
+	* @param int $id of the topic
+	*/
+	public function delete($id)
+	{
+	    $this->db->exec("DELETE FROM forums WHERE id = ".$id);
+	    $this->db->exec("DELETE FROM forumsanswers WHERE forums = ".$id);
 	}
 	
 	

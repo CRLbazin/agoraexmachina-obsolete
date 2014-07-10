@@ -14,9 +14,10 @@ namespace library;
 */
 class baseManager
 {
-	protected	$managers = array();
-	protected	$db;
-	protected	$module;
+	protected  $managers = array();
+	protected  $service = array();   
+	protected  $db;
+	protected  $module;
 	
 	/**
 	* constructor of the base manager class.
@@ -28,16 +29,16 @@ class baseManager
 		$this->db = new \PDO('mysql:host='.SQL_HOTE.';port='.SQL_PORT.';dbname='.SQL_DB, SQL_USR, SQL_PWD);
 	}
 	
+
 	/**
-	* get the manager of a module.
+	* get the manager of a module
 	* @param string name of the module
 	* @return object manager of the module
 	*/
 	public function getManagerOf($module)
 	{
 		if(!is_string($module) || empty($module))
-			throw new \InvalidArgumentException(_TR_ModuleNotFound);
-		
+			throw new \InvalidArgumentException('Le module spécifié est vide');
 		else if(!isset($this->managers[$module]))
 		{
 			preg_match_all('/([\w]*)\\\([\w]*)$/', $module, $modules);
@@ -45,16 +46,19 @@ class baseManager
 			if(!isset($modules[1][0]))
 				$manager = "\\applications\\modules\\".$module."\\managers\\".$module."Manager";
 			else
-			{
 				$manager = "\\applications\\modules\\".$modules[1][0]."\\managers\\".$modules[2][0]."Manager";
-			}
+			
 			if(class_exists($manager))
-			{
 				$this->managers[$module] = new $manager();
-				return $this->managers[$module];
-			}
-		}	
+		}
+		
+		if(isset($this->managers[$module]))
+			return $this->managers[$module];
+		else
+			return false;
 	}
+	
+	
 	
 	/**
 	* query get the datas by an id.

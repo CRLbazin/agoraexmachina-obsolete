@@ -22,6 +22,7 @@ class votesusersEntity extends \library\baseEntity
 	/**
 	* setter id
 	* @param int id of the entity
+	* @return void
 	*/
 	public function setId($id)
 	{
@@ -40,6 +41,7 @@ class votesusersEntity extends \library\baseEntity
 	/**
 	* setter votes
 	* @param int votes of the entity
+	* @return void
 	*/
 	public function setVotes($votes)
 	{
@@ -58,6 +60,7 @@ class votesusersEntity extends \library\baseEntity
 	/**
 	* setter users
 	* @param int users of the entity
+	* @return void
 	*/
 	public function setUsers($users)
 	{
@@ -76,6 +79,7 @@ class votesusersEntity extends \library\baseEntity
 	/**
 	* setter values
 	* @param string values of the entity
+	* @return void
 	*/
 	public function setValues($values)
 	{
