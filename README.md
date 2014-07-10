@@ -9,7 +9,7 @@ L'outil permet de créer des `ateliers de discussion` organisés par `thèmes`, 
 
 Les propositions ayant recueillies le plus de votes sont validées à l'issu de l'atelier.
 
-Le terme `Liquide` signifie que chaque utilisateur peut à tout instant, déléguer sa voix ou retirer sa délégation.
+Le terme `Liquide` signifiant qu'il est possible de déléguer sa voix de manière fluide et rapide.
 
 
 Présentation technique
