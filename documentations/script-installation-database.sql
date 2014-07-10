@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 16 Mai 2014 Ã  19:08
+-- GÃ©nÃ©rÃ© le :  Jeu 10 Juillet 2014 Ã  22:48
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `agoraexmachina`
+-- Base de donnÃ©es :  `agoraexmachina`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +30,23 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `delegations`
+--
+
+CREATE TABLE IF NOT EXISTS `delegations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `users1` int(11) DEFAULT NULL,
+  `users2` int(11) DEFAULT NULL,
+  `categories` int(11) DEFAULT NULL,
+  `instances` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -45,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `forums` (
   `title` varchar(255) NOT NULL,
   `creationdate` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -61,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `forumsanswers` (
   `creationdate` datetime NOT NULL,
   `descr` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -78,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `instances` (
   `users` int(11) DEFAULT NULL,
   `categories` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -95,14 +111,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `level` int(11) NOT NULL,
   `creationDate` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Contenu de la table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `password`, `email`, `active`, `level`, `creationDate`) VALUES
-(1, 'admin', 'admin', 'admin@admin.net', 1, 8, '');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -117,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `votes` (
   `name` varchar(255) NOT NULL,
   `descr` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -131,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `votesusers` (
   `users` int(11) NOT NULL,
   `values` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
