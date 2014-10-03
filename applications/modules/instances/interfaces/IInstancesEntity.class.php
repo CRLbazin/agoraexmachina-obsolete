@@ -42,6 +42,10 @@ interface IInstancesEntity
 
 	function getCategories();
 	
+	function getWhoCanSeeTheInstance();
+	
+	function setWhoCanSeeTheInstance($whoCanSeeTheInstance);
+	
 	
 }
 ?>

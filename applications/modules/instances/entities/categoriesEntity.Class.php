@@ -16,7 +16,10 @@ class categoriesEntity extends \library\baseEntity
 	protected 
 		$id,
 		$name,
-		$code;
+		$code,
+		$sizeW,
+		$sizeH,
+		$color;
 		
 	/**
 	* setter id
@@ -53,6 +56,62 @@ class categoriesEntity extends \library\baseEntity
 	public function getName()
 	{
 		return $this->name;
+	}
+	
+
+	/**
+	 * size W getter
+	 * @return string sizeW
+	 */
+	public function getSizeW()
+	{
+		return $this->sizeW;
+	}
+	
+	/**
+	 * sizeW setter
+	 * @param string $sizeW
+	 */
+	public function setSizeW($sizeW)
+	{
+		$this->sizeW = $sizeW;
+	}
+	
+	
+	/**
+	* size H getter
+	* @return string sizeH 
+	*/
+	public function getSizeH()
+	{
+		return $this->sizeH;
+	}
+	
+	/**
+	* sizeH setter
+	* @param string $sizeH
+	*/
+	public function setSizeH($sizeH)
+	{
+		$this->sizeH = $sizeH;
+	}
+	
+	/**
+	* get color
+	* @return string color
+	*/
+	public function getColor()
+	{
+		return $this->color;
+	}
+	
+	/**
+	* color setter
+	* @param string $color
+	*/
+	public function setColor($color)
+	{
+		$this->color = $color;
 	}
 }	
 

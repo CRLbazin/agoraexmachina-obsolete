@@ -99,6 +99,26 @@ class delegationsService extends \library\baseService
 	{
 	    return $this->currentManager->getDelegationReceiveForInstances($categories, $instances, $users2);
 	}
+
+	/**
+	 * get delegations receive for a user
+	 * @param int id of the user
+	 * @return array containing all of the result set rows
+	 */
+	public function getDelegationReceive($users2)
+	{
+	    return $this->currentManager->getDelegationReceive($users2);
+	}
+	
+	/**
+	* get delegations given for a user
+	* @param int id of the user
+	* @return array containing all of the result set rows
+	*/
+	public function getDelegationGiven($users1)
+	{
+	    return $this->currentManager->getDelegationGiven($users1);
+	}
 	
 }
 

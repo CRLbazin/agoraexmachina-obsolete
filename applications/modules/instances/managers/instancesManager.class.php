@@ -43,29 +43,111 @@ class instancesManager extends \library\baseManager
 			
 	}
 	
-	
+
 	/**
-	* get instances by categories
-	* @param array|int id of the categorie(s)
-	* @return array containing all of the result set rows
-	*/
+	 * get instances by categories
+	 * @param array|int id of the categorie(s)
+	 * @return array containing all of the result set rows
+	 */
 	public function getByCategories($categories)
 	{
-		if(!is_array($categories))
-		{
-			$req = $this->db->query("SELECT * FROM ".$this->module." WHERE categories = '".$categories."' ORDER BY categories");
-		}
-		else
-		{
-			$sql = "SELECT * FROM ".$this->module." WHERE active = 1 ";
-			foreach($categories as $value)
-				$sql .= "OR categories = '".$value."' ";
-			$sql ."  ORDER BY categories" ;
-			$req = $this->db->query($sql);
-		}
-		return $req->fetchAll(\PDO::FETCH_OBJ);
+	    if(!is_array($categories))
+	    {
+	        $req = $this->db->query("SELECT * FROM ".$this->module." WHERE categories = '".$categories."' ORDER BY categories");
+	    }
+	    else
+	    {
+	        $sql = "SELECT * FROM ".$this->module." WHERE active = 1 ";
+	        foreach($categories as $value)
+	            $sql .= "OR categories = '".$value."' ";
+	        $sql ."  ORDER BY categories" ;
+	        $req = $this->db->query($sql);
+	    }
+	    return $req->fetchAll(\PDO::FETCH_OBJ);
+	}
+
+	/**
+	 * get instances by categories with user security
+	 * @param array|int id of the categorie(s)
+	 * @param int id of the user
+	 * @return array containing all of the result set rows
+	 */
+	public function getSecureByCategories($categories, $user)
+	{
+	    if(!is_array($categories))
+	    {
+	        $req = $this->db->query("
+	            SELECT a.* 
+	            FROM ".$this->module." a
+	            WHERE 
+	                a.categories = '".$categories."' 
+	            AND 
+	            (
+	                a.whoCanSeeTheInstance = 'allUsers'
+	            OR a.users = '".$user."'
+	            OR 
+	            (
+	                a.whoCanSeeTheInstance = 'guests'
+	            AND '".$user."' in (select users from instancesusers b where b.instances = a.id and b.whoCanSeeTheInstance = 1)
+                )
+                )
+	            ORDER BY categories");
+	        
+	    }
+	    else
+	    {
+	        $sql = "SELECT * FROM ".$this->module." WHERE active = 1 ";
+	        foreach($categories as $value)
+	            $sql .= "OR categories = '".$value."' ";
+	        $sql ."  ORDER BY categories" ;
+	        $req = $this->db->query($sql);
+	    }
+	    return $req->fetchAll(\PDO::FETCH_OBJ);
 	}
 	
+	
+
+	/**
+	 * get instances by id with user security
+	 * @param array|int id of the categorie(s)
+	 * @param int id of the user
+	 * @return array containing all of the result set rows
+	 */
+	public function getSecureById($instances, $users)
+	{
+	    if(!is_array($instances))
+	    {
+	        $req = $this->db->query("
+	            SELECT 
+	                a.*,
+	                b.whoCanSeeTheInstance as userCanSeeTheInstance,
+	                b.whoCanVote as userCanVote,
+	                b.whoCanWriteVote as userCanWriteVote
+	            FROM ".$this->module." a
+	            LEFT JOIN instancesusers b
+	                ON     b.instances = a.id
+	                AND    b.users = '".$users."'
+	            WHERE
+	                a.id = '".$instances."'
+	            AND
+	            (
+	                a.whoCanSeeTheInstance = 'allUsers'
+	            OR a.users = '".$users."'
+	            OR
+	            (
+	                   a.whoCanSeeTheInstance = 'guests'
+	                AND '".$users."' in (select users from instancesusers b where b.instances = a.id and b.whoCanSeeTheInstance = 1)
+                )
+                )");
+	         
+	    }
+	    
+	    $res = $req->fetchAll(\PDO::FETCH_OBJ);
+	    if(isset($res[0]))
+	        return $res[0];
+	    else
+	        return null;
+	}
 	
 	/**
 	* save an instance
@@ -86,7 +168,14 @@ class instancesManager extends \library\baseManager
 			image = :image,
 			deadline = :deadline,
 			users = :users,
-			categories = :categories";
+			categories = :categories,
+		    whoCanSeeTheInstance = :whoCanSeeTheInstance,
+		    whoCanVote = :whoCanVote,
+		    whoCanWriteVote = :whoCanWriteVote,
+		    typeOfDelegation = :typeOfDelegation,
+		    quorumRequired = :quorumRequired,
+		    voteAccountingMethod = :voteAccountingMethod
+		    ";
 		
 		if($instances->getId() != "")
 			$sql .= " WHERE id = :id ";
@@ -103,6 +192,12 @@ class instancesManager extends \library\baseManager
 		$req->bindValue(":deadline", $instances->getdeadline());
 		$req->bindValue(":users", $instances->getUsers());
 		$req->bindValue(":categories", $instances->getCategories());
+		$req->bindValue(":whoCanSeeTheInstance", $instances->getWhoCanSeeTheInstance());
+		$req->bindValue(":whoCanVote", $instances->getWhoCanVote());
+		$req->bindValue(":whoCanWriteVote", $instances->getWhoCanWriteVote());
+		$req->bindValue(":typeOfDelegation", $instances->getTypeOfDelegation());
+		$req->bindValue(":quorumRequired", $instances->getQuorumRequired());
+		$req->bindValue(":voteAccountingMethod", $instances->getVoteAccountingMethod());
 		
 		
 		return $req->execute() ? true : false;

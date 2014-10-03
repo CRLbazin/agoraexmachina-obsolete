@@ -37,18 +37,18 @@
 						<div class="list">
 							<div style="position : absolute;top:5px;right : 15px;z-index:999;font-size:13px;">
 							<?php 
-							if(isset($_SESSION['users']))
+							if(isset($_SESSION['users']) && date('Y-m-d') < $instances->deadline)
 							{
 								if($answer->users == $_SESSION['users']->id or $_SESSION['users']->level == 8)
 								{
 									?>
 									
-										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>-<?php echo url($instances->getName());?>/forums/<?php echo $forum->id;?>/editAnswers/<?php echo $answer->answersid;?>"  alt="editer"><span class="glyphicon glyphicon-edit"></span></a>
-										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>-<?php echo url($instances->getName());?>/forums/<?php echo $forum->id;?>/deleteAnswers/<?php echo $answer->answersid;?>"  alt="supprimer"><span class="glyphicon glyphicon-trash"></span></a>
+										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name);?>/forums/<?php echo $forum->id;?>/editAnswers/<?php echo $answer->answersid;?>"  alt="editer"><span class="glyphicon glyphicon-edit"></span></a>
+										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name);?>/forums/<?php echo $forum->id;?>/deleteAnswers/<?php echo $answer->answersid;?>"  alt="supprimer"><span class="glyphicon glyphicon-trash"></span></a>
 									<?php									 
 								} 
 								?>
-								<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>-<?php echo url($instances->getName());?>/forums/<?php echo $forum->id;?>/addAnswers/<?php echo $answer->answersid;?>"  alt="repondre"><span class="glyphicon glyphicon-share-alt"></span></a>
+								<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name);?>/forums/<?php echo $forum->id;?>/addAnswers/<?php echo $answer->answersid;?>"  alt="repondre"><span class="glyphicon glyphicon-share-alt"></span></a>
 								<?php
 							}
 							?>
@@ -71,18 +71,18 @@
 						<div class="list">
 							<div style="position : absolute;top:5px;right : 15px;z-index:999;font-size:13px;">
 							<?php 
-							if(isset($_SESSION['users']))
+							if(isset($_SESSION['users']) && date('Y-m-d') < $instances->deadline)
 							{
 								if($answer->users == $_SESSION['users']->id or $_SESSION['users']->level == 8)
 								{
 									?>
 									
-										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>-<?php echo url($instances->getName());?>/forums/<?php echo $forum->id;?>/editAnswers/<?php echo $answer->answersid;?>"  alt="editer"><span class="glyphicon glyphicon-edit"></span></a>
-										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>-<?php echo url($instances->getName());?>/forums/<?php echo $forum->id;?>/deleteAnswers/<?php echo $answer->answersid;?>"  alt="supprimer"><span class="glyphicon glyphicon-trash"></span></a>
+										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name);?>/forums/<?php echo $forum->id;?>/editAnswers/<?php echo $answer->answersid;?>"  alt="editer"><span class="glyphicon glyphicon-edit"></span></a>
+										<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name);?>/forums/<?php echo $forum->id;?>/deleteAnswers/<?php echo $answer->answersid;?>"  alt="supprimer"><span class="glyphicon glyphicon-trash"></span></a>
 									<?php									 
 								} 
 								?>
-								<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->getId() ?>-<?php echo url($instances->getName());?>/forums/<?php echo $forum->id;?>/addAnswers/<?php echo $answer->answersid;?>"  alt="repondre"><span class="glyphicon glyphicon-share-alt"></span></a>
+								<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name);?>/forums/<?php echo $forum->id;?>/addAnswers/<?php echo $answer->answersid;?>"  alt="repondre"><span class="glyphicon glyphicon-share-alt"></span></a>
 								<?php
 							}
 							?>

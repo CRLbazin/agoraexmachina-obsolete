@@ -14,6 +14,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['users']->name ?> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo WEBSITE_ROOT?>/users/private/<?php echo $_SESSION['users']->id ?>"><span class="glyphicon glyphicon-user"></span> Profil utilisateur</a></li>
+								<li><a href="<?php echo WEBSITE_ROOT ?>/users/delegations"><span class="glyphicon glyphicon-list-alt"></span> Delegations</a></li>
 								<li><a href="<?php echo WEBSITE_ROOT ?>/users/disconnect"><span class="glyphicon glyphicon-off"></span> Deconnexion</a></li>
 								<li class="divider"></li>
 								<?php

@@ -21,18 +21,37 @@ class instancesController extends \library\baseController
 	public function __construct(\library\application $application, $module, $action)
 	{
 		parent::__construct($application, $module, $action);
+		require('functions\functions.php');
 		
 		//delegations
+		$delegationsCategories = array();
+		$delegationsInstances = array();
 		if(isset($_SESSION['users']))
 		{
 			$delegationService = new \applications\modules\instances\services\delegationsService();
-			unset($_SESSION['delegation']);
+			unset($_SESSION['delegations']);
 			$_SESSION['delegations']['categories'] = $delegationService->getDelegationGivenForCategories($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id);
 			$_SESSION['delegations']['instances'] = $delegationService->getDelegationGivenForInstances($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id);
 			$_SESSION['delegations']['receiveForCategories'] = $delegationService->getDelegationReceiveForCategories($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id);
 			$_SESSION['delegations']['receiveForInstances'] = $delegationService->getDelegationReceiveForInstances($this->application->getHttpRequest()->getGET('id'), $_SESSION['users']->id, $this->application->getHttpRequest()->getGET('categories'));
 			
-		}	
+			foreach($_SESSION['delegations']['receiveForCategories'] as $v)
+			    array_push($delegationsCategories, $v);
+			
+			foreach($_SESSION['delegations']['receiveForInstances'] as $v)
+			    array_push($delegationsInstances, $v);
+			
+		}
+		else
+		    unset($_SESSION['delegations']);
+		
+		
+
+		
+		$this->page->addVar('delegationsCategories', $delegationsCategories);
+		$this->page->addVar('delegationsInstances', $delegationsInstances);
+		    	
+		
 	}
 	
 	
@@ -48,9 +67,10 @@ class instancesController extends \library\baseController
 	public function indexAction(\library\httpRequest $request)
 	{		
 		$categoriesService = new \applications\modules\instances\services\categoriesService();
-		$this->page->addVar('categories', $categoriesService->getById($request->getGET('id')));
+		$instancesUsersService = new \applications\modules\instances\services\usersService();
 		
-		$this->page->addVar('instances', $this->currentService->getByCategories($request->getGET('id')));
+		$this->page->addVar('categories', $categoriesService->getById($request->getGET('id')));
+		$this->page->addVar('instances', $this->currentService->getSecureByCategories($request->getGET('id'), @$_SESSION['users']->id));
 
 		
 	}
@@ -92,19 +112,36 @@ class instancesController extends \library\baseController
 	{
 		//init
 		$currentUser = isset($_SESSION['users']) ? $_SESSION['users']->id : 0;
+
+		
 		
 		//get categories and votes		
-		$categories = $this->getServiceOf('instances\categories')->getById($request->getGET('categories'));
-		$votes = $this->getServiceOf('instances\votes')->getByInstances($request->getGET('id'), $currentUser);
 		$forums = $this->getServiceOf('instances\forums')->getByInstances($request->getGET('id'));
 		$forumsanswers = $this->getServiceOf('instances\forums')->getByInstancesWithAnswers($request->getGET('id'));
+		$users = $this->getServiceOf('instances\users')->getByInstances($request->getGET('id'));
+		$instances = $this->currentService->getSecureById($request->getGET('id'), @$_SESSION['users']->id);
+		
+		
+		$categories = $this->getServiceOf('instances\categories')->getById($request->getGET('categories'));
+		$votes = $this->getServiceOf('instances\votes')->getByInstances($request->getGET('id'), $currentUser);
+		
+		$votesFor = $this->getServiceOf('instances\votes')->getByInstancesAndResults($request->getGET('id'), 'voteFor', $instances->quorumRequired);
+		$votesAgainst = $this->getServiceOf('instances\votes')->getByInstancesAndResults($request->getGET('id'), 'voteAgainst', $instances->quorumRequired);
+		$votesWhite = $this->getServiceOf('instances\votes')->getByInstancesAndResults($request->getGET('id'), 'voteWhite', $instances->quorumRequired);
+		$votesStatusQuo = $this->getServiceOf('instances\votes')->getByInstancesAndResults($request->getGET('id'), 'voteStatusQuo', $instances->quorumRequired);
+		
 		
 			
-		$this->page->addVar('instances', $this->currentEntity);
+		$this->page->addVar('instances', $instances);
 		$this->page->addVar('categories', $categories);
 		$this->page->addVar('votes', $votes);
 		$this->page->addVar('forums', $forums);
 		$this->page->addVar('forumsanswers', $forumsanswers);
+		$this->page->addVar('users', $users);
+		$this->page->addVar('votesFor', $votesFor);
+		$this->page->addVar('votesAgainst', $votesAgainst);
+		$this->page->addVar('votesWhite', $votesWhite);
+		$this->page->addVar('votesStatusQuo', $votesStatusQuo);
 			
 	}
 	

@@ -39,13 +39,13 @@ class forumsService extends \library\baseService
     }
     
     /**
-    * delete a forum
+    * delete an answers
     * @param int id of the forum
     * @return boolean
     */
-    public function delete($id)
+    public function deleteAnswers($id)
     {
-    	return ($this->currentManager->delete($id)) ? true : false;
+    	return ($this->currentManager->deleteAnswers($id)) ? true : false;
     }
     
     
@@ -68,6 +68,16 @@ class forumsService extends \library\baseService
     public function getByInstancesWithAnswers($instance)
     {
         return $this->currentManager->getByInstancesWithAnswers($instance);
+    }
+    
+    /**
+     * get answers by id
+     * @param int id of the answer
+     * @return array containing all of the result set rows
+     */
+    public function getAnswersById($id)
+    {
+        return $this->currentManager->getAnswersById($id);
     }
     
     

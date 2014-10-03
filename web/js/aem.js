@@ -12,7 +12,7 @@
 	
 	//init datePicker
 	 $(function() {
-		$( ".datepicker" ).datepicker();
+		 $( ".datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
 	});
 	
 	
@@ -34,6 +34,7 @@
 	
 	
 	
+	
 	$('#myModal').on('hidden.bs.modal', function () {
 		$(this).removeData('bs.modal');
 		window.location.reload(true);
@@ -43,7 +44,12 @@
 	if(window.location.hash){
 		   $('#myTab').find('a[href="'+window.location.hash+'"]').tab('show');
 		}
-	
+
+	$('.selectpicker').selectpicker({
+		style: 'btn',
+		size: 14,
+		width : 350
+	});
 	
 	
 });

@@ -17,7 +17,6 @@ class delegationsEntity extends \library\baseEntity
 		$id,
 		$users1,
 		$users2,
-		$users2List,
 		$categories,
 		$instances;
 		
@@ -78,24 +77,6 @@ class delegationsEntity extends \library\baseEntity
 		return $this->users2;
 	}
 	
-	/**
-	* setter users2List
-	* @param array $users2List (list of all users2 available)
-	* @return void
-	*/
-	public function setUsers2List($users2List)
-	{
-		$this->users2List = $users2List;
-	}
-	
-	/**
-	* getter getUsers2List (list of all users2 available)
-	* @return array
-	*/
-	public function getUsers2List()
-	{
-		return $this->users2List;
-	}
 	
 	/**
 	* setter categories

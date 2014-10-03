@@ -19,12 +19,17 @@ class delegationsForm extends \library\baseFormBuilder
 	*/
 	public function build()
 	{ 
+	    
+	    $usersService = new \applications\modules\users\services\usersService;
+	    foreach($usersService->getAllActiveUsers($_SESSION['users']->id) as $value)
+	        $users2List[$value->id] = $value->name;
+	    	    
 		$this->form->add(new \library\webComponents\select(
 			array(
 			    "title" 	=> _TR_Users2, 
 			    "name" 		=> "users2",
 			    "value" 	=> $this->form->getEntity()->getUsers2(),
-			    "values"	=> $this->form->getEntity()->getUsers2List(),
+			    "values"	=> $users2List,
 		)));
 		
 

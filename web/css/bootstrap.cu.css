@@ -79,7 +79,8 @@
 }
 
 .bg-lightMauve {
-  background-color: #E1C1FF !important;
+  background-color: #D2B9D3 !important;
+  color : #583759;
 }
 .bg-taupe {
   background-color: #87794e !important;
@@ -1077,6 +1078,8 @@
 
 
  .shortcut {
+  float: left;
+  
   padding: 4px 12px 4px 0px;
   margin : 5px;
   vertical-align: middle !important;
@@ -2306,10 +2309,15 @@ textarea
   display: block;
   float: left;
   margin: 0 10px 10px 0;
-  padding: 1px;
+  padding: 5px;
   cursor: pointer;
   background-color: #eeeeee;
   box-shadow: inset 0px 0px 1px #FFFFCC;
+}
+
+.tile hr
+{
+	border-top : 1px solid #E0E0E0;
 }
 .tile:hover {
   outline: #999999 solid 3px;
@@ -2323,40 +2331,48 @@ textarea
 .tile.no-outline {
   outline-color: transparent;
 }
-.tile:after {
+.tile:after,
+shortcut:after {
   width: 120px;
   height: 120px;
   margin: 0 10px 10px 0;  
   
 }
-.tile.sshalf {
+.tile.sshalf,
+.shortcut.sshalf {
   width: 20px;
   height: 20px;
 }
-.tile.shalf {
+.tile.shalf,
+.shortcut.shalf {
   width: 35px;
   height: 35px;
 }
-.tile.half {
+.tile.half,
+.shortcut.half {
   width: 60px;
   height: 60px;
 }
 .tile.double {
   width: 250px;
 }
-.tile.double-vertical {
+.tile.double-vertical,
+.shortcut.double-vertical
+ {
   height: 250px;
 }
 .tile.triple {
   width: 380px;
 }
-.tile.triple-vertical {
+.tile.triple-vertical,
+.shortcut.triple-vertical {
   height: 380px;
 }
 .tile.quadro {
   width: 510px;
 }
-.tile.quadro-vertical {
+.tile.quadro-vertical,
+.shortcut.quadro-vertical {
   height: 510px;
 }
 .tile.selected {
@@ -2718,7 +2734,7 @@ body
 }
 
 
-.alert, .btn, .modal-content
+.alert, .btn, .modal-content, .panel
 {
   border-radius: 0px;
 }
@@ -2772,3 +2788,27 @@ fieldset[disabled] .btn-mauve.active {
 {
 	cursor : default !important;
 }
+
+
+.table.no-border, .class .no-border tr .class .no-border tr td
+{
+	padding : 20px;
+	border : 0px;
+}
+
+
+.notice {
+  display: block;
+  min-width: 200px;
+  height: auto;
+  position: relative;
+  background-color: #428bca;
+  padding: 10px;
+}
+
+
+
+.panel-heading
+{
+	font-weight : bold;
+}]

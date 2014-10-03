@@ -123,7 +123,7 @@ class forumsController extends \library\baseController
 		//define the layout
 		$this->page->setLayout('modal');
 		
-		$this->currentService->delete($request->getGET('id'));
+		$this->currentService->deleteAnswers($request->getGET('id'));
 		$this->page->addVar('msgSuccess', _TR_elementsDeleted);
 	}
 	

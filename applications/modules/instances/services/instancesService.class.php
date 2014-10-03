@@ -67,18 +67,41 @@ class instancesService extends \library\baseService
    	   	    $this->delete($instance->id);
    	   	}
     }
-    
-    
+
+
     /**
-    * get instances by categories
-    * @param array|int id of the categorie(s)
-    * @return array containing all of the result set rows
-    */
+     * get instances by categories
+     * @param array|int id of the categorie(s)
+     * @return array containing all of the result set rows
+     */
     public function getByCategories($categories)
     {
         return $this->currentManager->getByCategories($categories);
     }
 
+
+    /**
+     * get instances by categories with users security 
+     * @param array|int id of the categorie(s)
+     * @param int id of the user
+     * @return array containing all of the result set rows
+     */
+    public function getSecureByCategories($categories, $users)
+    {
+        return $this->currentManager->getSecureByCategories($categories, $users);
+    }
+    
+    /**
+     * get instance by id with users security
+     * @param int id of the instance
+     * @param int id of the user
+     * @return object result
+     */
+    public function getSecureById($instances, $users)
+    {
+        return $this->currentManager->getSecureById($instances, $users);
+    }
+    
     
 }
 

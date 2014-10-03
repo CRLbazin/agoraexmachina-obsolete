@@ -31,7 +31,6 @@ class delegationsController extends \library\baseController
 		
 		//build delegation entity
 		$this->currentEntity->setUsers1($_SESSION['users']->id);
-		$this->currentEntity->setUsers2List($users);
 		
 		//set categories and instances
 		if($request->getGET('categories') <> "")

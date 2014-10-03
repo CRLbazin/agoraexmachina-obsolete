@@ -50,6 +50,7 @@ class categoriesManager extends \library\baseManager
 	*/
 	public function save(\applications\modules\instances\entities\categoriesEntity $categories )
 	{
+		print_r($categories);
 		if($categories->getId() == "")
 			$sql = "INSERT INTO categories";
 		else
@@ -57,7 +58,10 @@ class categoriesManager extends \library\baseManager
 
 		$sql .= "
 			SET
-			name = :name";
+			name = :name,
+			sizeW = :sizeW,
+			sizeH = :sizeH,
+			color = :color";
 		
 		if($categories->getId() != "")
 			$sql .= " WHERE id = :id ";
@@ -66,6 +70,10 @@ class categoriesManager extends \library\baseManager
 
 		if($categories->getId() != "")
 			$req->bindValue(":id", $categories->getId());
+		
+		$req->bindValue(":sizeW", $categories->getSizeW());
+		$req->bindValue(":sizeH", $categories->getSizeH());
+		$req->bindValue(":color", $categories->getColor());
 
 
 		$req->bindValue(":name", $categories->getName());
@@ -82,8 +90,7 @@ class categoriesManager extends \library\baseManager
 	{
 		$sql = "
 			SELECT 
-				a.id,
-				a.name,
+				a.*,
 				count(b.id) as instancesCount
 			FROM 
 				categories a

@@ -29,7 +29,7 @@
 	<translate var="_TR_Edit" value="Editer" />
 	<translate var="_TR_SIntroduction" value="Introduction courte" />
 	<translate var="_TR_Introduction" value="Introduction" />
-	<translate var="_TR_Content" value="Contenu" />
+	<translate var="_TR_Content" value="Description" />
 	<translate var="_TR_Image" value="Image" />
 	<translate var="_TR_Highlight" value="Mis en avant" />
 	<translate var="_TR_Code" value="Code" />
@@ -52,6 +52,7 @@
 	<translate var="_TR_Deadline" value="Date de fin" />
 	<translate var="_TR_Help" value="Aide" />
 	<translate var="_TR_Actions" value="Actions" />
+	<translate var="_TR_NoAction" value="Aucune action possible" />
 	<translate var="_TR_Informations" value="Informations" />
 	
 	
@@ -76,6 +77,7 @@
 	<translate var="_TR_InstancesAddSuccessfully" value="Atelier ajouté avec succès" />
 	<translate var="_TR_InstancesUpdatedSuccessfully" value="Atelier mis à jour avec succès" />
 	<translate var="_TR_Categories" value="Thèmes" />
+	<translate var="_TR_Instances" value="Atelier" />
 	<translate var="_TR_CategoriesList" value="Liste des thèmes" />
 	<translate var="_TR_AddAnInstance" value="Créer un nouvel atelier" />
 	<translate var="_TR_AddACategories" value="Ajouter un thème" />
@@ -88,17 +90,20 @@
 	<translate var="_TR_adminUsers" value="Administration des utilisateurs" />
 	<translate var="_TR_EditUser" value="Editer un utilisateur" />
 	<translate var="_TR_EditInstance" value="Editer l'atelier " />
-	<translate var="_TR_InstancesDisplayHelp" value="Cette page affiche le contenu d'un atelier.[br][br]Sa description, ses votes et ses discussions entre membres sont organisés dans chaque onglet." />
+	<translate var="_TR_InstancesDisplayHelp" value="Cette page affiche le contenu d'un atelier.[br][br]Sa description, ses discussions entre membres et les votes sont répartis dans les différents onglets." />
 	<translate var="_TR_Votes" value="Votes" />
-	<translate var="_TR_Forum" value="Forum" />
+	<translate var="_TR_Forum" value="Discussion" />
+	<translate var="_TR_Forums" value="Discussions" />
 	<translate var="_TR_Desc" value="Description" />
 	<translate var="_TR_DeleteInstance" value="Supprimer l'atelier" />
 	<translate var="_TR_EditVotes" value="Editer le vote" />
 	<translate var="_TR_AddVotes" value="Ajouter une proposition" />
-	<translate var="_TR_AddForums" value="Ajouter un topic" />
-	<translate var="_TR_EditForums" value="Editer un topic" />
+	<translate var="_TR_AddForum" value="Ajouter une discussion" />
+	<translate var="_TR_AddForums" value="Ajouter un sujet de débat" />
+	<translate var="_TR_EditForums" value="Editer un sujet de débat" />
 	<translate var="_TR_MustBeConnected" value="Vous devez être connecté" />
-	<translate var="_TR_elementsDeleted" value="Eléments supprimés avec succès." />
+	<translate var="_TR_InstanceDeadlineOver" value="L'instance est terminée." />
+	<translate var="_TR_elementsDeleted" value="Elément(s) supprimé(s) avec succès." />
 	<translate var="_TR_elementDoesntExists" value="l'élément n'existe pas" />
 	<translate var="_TR_elementExists" value="l'élément existe déjà" />
 	<translate var="_TR_mailNotSend" value="Problème rencontré avec l'envoi des emails" />
@@ -109,9 +114,14 @@
 	<translate var="_TR_UserUpdateSuccessfully" value="Utilisateur mis à jour avec succès" />
 	<translate var="_TR_MustBeConnectedForInstanceAction" value="Vous devez être connecté pour pouvoir intervenir dans un atelier.[br][br]Utilisez le bouton 'se connecter' en haut à droite pour vous connecter ou créer un compte." />
 	<translate var="_TR_voteConsidered" value="Vote pris en compte" />
+	<translate var="_TR_NoDelegation" value="Aucune délégation" />
 	<translate var="_TR_AddDelegation" value="Donner une délégation" />
 	<translate var="_TR_Users1" value="De l'utilisateur" />
 	<translate var="_TR_Users2" value="Vers l'utilisateur" />
+	<translate var="_TR_Delegations" value="Délégations" />
+	<translate var="_TR_Delegation" value="Délégation" />
+	<translate var="_TR_DelegationsGiven" value="Délégations données" />
+	<translate var="_TR_DelegationsReceive" value="Délégations reçues" />
 	<translate var="_TR_DelegationAddSuccessfully" value="Délégation ajoutée avec succès" />
 	<translate var="_TR_DelegationGivenTo" value="Délégation donnée à " />
 	<translate var="_TR_DeleteDelegation" value="Retirer la délégation" />
@@ -119,9 +129,39 @@
 	<translate var="_TR_DelegationDeletedSuccessfully" value="Suppression de la délégation réalisée avec succès" />
 	<translate var="_TR_DelegationReceiveFrom" value="Délégation reçue de " />
 	<translate var="_TR_NoDelegationReceive" value="Aucune délégation reçue" />
-	<translate var="_TR_ChooseADelegation" value="Vous disposez d'une ou plusieurs délégations. Voulez vous voter pour une personne qui vous déléguer sa voix ?" />
+	<translate var="_TR_ChooseADelegation" value="Vous disposez d'une ou plusieurs délégations. Choisissez qui va effectuer ce vote" />
 	<translate var="_TR_You" value="Vous même" />
 	<translate var="_TR_VoteConfirm" value="Etes-vous sur de vouloir faire ce vote ?" />
 	<translate var="_TR_CategoriesSuccessfullyUpdate" value="thème mis à jour avec succès." />
 	<translate var="_TR_CategoriesSuccessfullyCreate" value="Thème créé avec succès." />
+	<translate var="_TR_AddAnswer" value="Répondre" />
+	<translate var="_TR_AllUsers" value="Tous le monde" />
+	<translate var="_TR_Guests" value="Utilisateurs invités" />
+	<translate var="_TR_NoOne" value="Personne (mis à part l'auteur)" />
+	<translate var="_TR_WhoCanSeeTheInstance" value="Qui peut voir l'instance ?" />
+	<translate var="_TR_CanSeeTheInstance" value="Peut voir linstance" />
+	<translate var="_TR_CantSeeTheInstance" value="Ne peut pas voir l'instance" />
+	<translate var="_TR_WhoCanVote" value="Qui peut voter des propositions ?" />
+	<translate var="_TR_CanVote" value="Peut voter des propositions" />
+	<translate var="_TR_CantVote" value="Ne peut pas voter des propositions" />
+	<translate var="_TR_WhoCanWriteVote" value="Qui peut rédiger des propositions ?" />
+	<translate var="_TR_CanWriteVote" value="Peut rédiger des propositions" />
+	<translate var="_TR_CantWriteVote" value="Ne peut pas rédiger des propositions" />
+	<translate var="_TR_Proposals" value="Propositions" />
+	<translate var="_TR_InstanceInformations" value="Informations sur l'instance" />
+	<translate var="_TR_Stats" value="Statistiques" />
+	<translate var="_TR_AddUsers" value="Ajouter un utilisateur" />
+	<translate var="_TR_EditUsers" value="Editer un utilisateur" />
+	<translate var="_TR_TypeOfDelegation" value="Type de délégation" />
+	<translate var="_TR_Procuration" value="Procuration" />
+	<translate var="_TR_QuorumRequired" value="Quorum requis" />
+	<translate var="_TR_VoteAccountingMethod" value="Méthode de comptabilisation des votes" />
+	<translate var="_TR_Condorcet" value="Condorcet" />
+	<translate var="_TR_Alternative" value="Alternatif" />
+	<translate var="_TR_VoteConfirmForAll" value="Etes-vous sur de vouloir faire ce vote ?" />
+	<translate var="_TR_Results" value="Résultats" />
+	<translate var="_TR_SizeW" value="Largeur" />
+	<translate var="_TR_SizeH" value="Hauteur" />
+	<translate var="_TR_Default" value="Standard" />
+	<translate var="_TR_Color" value="Couleur" />
 </translations>

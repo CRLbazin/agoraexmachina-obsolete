@@ -20,7 +20,13 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 		$image,
 		$deadline,
 		$users,
-		$categories;
+		$categories,
+		$whoCanSeeTheInstance,
+		$whoCanVote,
+		$whoCanWriteVote,
+		$typeOfDelegation,
+		$quorumRequired,
+		$voteAccountingMethod;
 		
 	/**
 	* setter id
@@ -148,5 +154,126 @@ class instancesEntity extends \library\baseEntity implements \applications\modul
 	{
 		return $this->categories;
 	}
+
+	/**
+	 * setter whoCanSeeTheInstance
+	 * @param string who can see the instance
+	 */
+	public function setWhoCanSeeTheInstance($whoCanSeeTheInstance)
+	{
+	    $this->whoCanSeeTheInstance = $whoCanSeeTheInstance;
+	}
+	
+	
+	/**
+	 * getter whoCanSeeTheInstance
+	 * @return string who can see the instance
+	 */
+	public function getWhoCanSeeTheInstance()
+	{
+	    return $this->whoCanSeeTheInstance;
+	}
+
+	/**
+	 * setter whoCanVote
+	 * @param string who can vote
+	 */
+	public function setWhoCanVote($whoCanVote)
+	{
+	    $this->whoCanVote = $whoCanVote;
+	}
+	
+	
+	/**
+	 * getter whoCanVote
+	 * @return string who can vote
+	 */
+	public function getWhoCanVote()
+	{
+	    return $this->whoCanVote;
+	}
+	
+	
+	/**
+	* setter whoCanWriteVote
+	* @param string who can write vote 
+	*/
+	public function setWhoCanWriteVote($whoCanWriteVote)
+	{
+	    $this->whoCanWriteVote = $whoCanWriteVote; 
+	}
+	
+	
+	/**
+	* getter whoCanWriteVote
+	* @return string who can write a vote 
+	*/
+	public function getWhoCanWriteVote()
+	{
+	    return $this->whoCanWriteVote;
+	}
+	
+	
+	/**
+	* get type of delegation
+	* @return string type of delegation  
+	*/
+	public function getTypeOfDelegation()
+	{
+	    return $this->typeOfDelegation;
+	}
+	
+	
+	/**
+	* setter type of delegation
+	* @param string type of delegation
+	* @return void
+	*/
+	public function setTypeOfDelegation($typeOfDelegation)
+	{
+	    $this->typeOfDelegation = $typeOfDelegation;
+	}
+
+	
+	/**
+	* get quorum
+	* @return string quorum pourcent  
+	*/
+	public function getQuorumRequired()
+	{
+	    return $this->quorumRequired;
+	}
+	
+	
+	/**
+	* setter quorum
+	* @param string quorum
+	* @return void
+	*/
+	public function setQuorumRequired($quorumRequired)
+	{ 
+	    $this->quorumRequired = $quorumRequired;
+	}
+	
+	
+	/**
+	* get vote accounting method
+	* @return string vote accounting method  
+	*/
+	public function getVoteAccountingMethod()
+	{
+	    return $this->voteAccountingMethod;
+	}
+	
+	/**
+	* setter vote accounting method
+	* @param string vote accounting method
+	* @return void
+	*/
+	public function setVoteAccountingMethod($voteAccountingMethod)
+	{ 
+	    $this->voteAccountingMethod = $voteAccountingMethod;
+	}
+	
 }	
 ?>

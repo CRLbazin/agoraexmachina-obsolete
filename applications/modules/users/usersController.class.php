@@ -41,6 +41,9 @@ class usersController extends \library\baseController
 	*/
 	public function registerAction(\library\httpRequest $request)
 	{	
+		
+		$this->currentEntity->setCreationDate(date("Y-m-d"));
+		
 		//create register form
 		$formBuilder = new \applications\modules\users\forms\registerForm($this->currentEntity);
 		$formBuilder->build();
@@ -70,6 +73,8 @@ class usersController extends \library\baseController
 	{
 		//define the template's attributes
 		$this->page->setLayout('back');
+		
+		$this->currentEntity->setCreationDate(date("Y-m-d"));
 		
 		//create form
 		$formBuilder = new \applications\modules\users\forms\usersForm($this->currentEntity);
@@ -146,6 +151,20 @@ class usersController extends \library\baseController
 	public function activeAction(\library\httpRequest $request)
 	{
 		$this->currentService->active($request->getGET('email'), $request->getGET('code'));		
+	}
+	
+	
+	/**
+    * list of delegations
+	* @param \library\httpRequest $request
+    * @return void
+    */
+	public function delegationsAction(\library\httpRequest $request)
+	{
+	    $delegationService = new \applications\modules\instances\services\delegationsService();
+	    
+        $this->page->addVar('delegationsGiven', $delegationService->getDelegationGiven($_SESSION['users']->id));
+        $this->page->addVar('delegationsReceive', $delegationService->getDelegationReceive($_SESSION['users']->id));
 	}
 	
 }

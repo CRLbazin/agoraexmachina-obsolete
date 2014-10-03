@@ -156,50 +156,63 @@ function summarize($text, $len)
 */
 function convertCodes($code)
 {
-	$code = (int)$code;
-	
-	switch($code)
-	{
-		case 100:
-			return _TR_InProgess;
-			break;
-		case 101:
-			return  _TR_Finished;
-			break;
-		case 102:
-			return  _TR_Canceled;
-			break;
-		case 103:
-			return  _TR_Proposed;
-			break;
-		case 104:
-			return  _TR_Valided;
-			break;
-		case 0:
-			return _TR_no;
-			break;
-		case 1:
-			return _TR_yes;
-			break;	
-		case 1000:
-			return _TR_Validation;
-			break;	
-		case 1001:
-			return _TR_SimpleSelect;
-			break;	
-		case 1002:
-			return _TR_MultipleSelect;
-			break;	
-		case 1003:
-			return _TR_Textarea;
-			break;	
-		case 1004:
-			return _TR_ImportDoc;
-			break;	
-		case 1005:
-			return _TR_ValidationDoc;
-			break;			
-	}
+	//$code = (int)$code;
+
+    if(is_string($code))
+    {
+            if ($code == "noOne")
+                return _TR_NoOne;
+            if ($code == "guests")
+                return _TR_Guests;
+            if ($code == "allUsers")
+                return _TR_AllUsers;
+            
+    }
+    else if(is_int($code))
+    {
+        switch($code)
+        {
+            case 100:
+                return _TR_InProgess;
+                break;
+    		case 101:
+    			return  _TR_Finished;
+    			break;
+    		case 102:
+    			return  _TR_Canceled;
+    			break;
+    		case 103:
+    			return  _TR_Proposed;
+    			break;
+    		case 104:
+    			return  _TR_Valided;
+    			break;
+    		case 0:
+    			return _TR_no;
+    			break;
+    		case 1:
+    			return _TR_yes;
+    			break;	
+    		case 1000:
+    			return _TR_Validation;
+    			break;	
+    		case 1001:
+    			return _TR_SimpleSelect;
+    			break;	
+    		case 1002:
+    			return _TR_MultipleSelect;
+    			break;	
+    		case 1003:
+    			return _TR_Textarea;
+    			break;	
+    		case 1004:
+    			return _TR_ImportDoc;
+    			break;	
+    		case 1005:
+    			return _TR_ValidationDoc;
+    			break;			
+    	}
+    }
 }
 
 /**
@@ -242,6 +255,34 @@ function msgAlert($msg)
 			<button type='button' class='close' data-dismiss='alert'>&times;</button>
 			<strong><u>". strtoupper("Information") ." </u>&nbsp;</strong> ". $msg ."
 		</div> <!-- /alert -->";
+}
+
+
+/**
+* display all delegations
+* @param string | array delegations name
+* return string message
+*/
+function msgDelegations($delegations)
+{
+    
+    $msg = '<div class="alert bg-lightMauve">
+				    <span class="glyphicon glyphicon-ok"></span>&nbsp;'._TR_DelegationReceiveFrom ;
+    
+    if(is_array($delegations))
+        foreach($delegations as $delegation)
+    {
+            $msg .= $delegation->users1Name.", ";
+    }
+    else
+        $msg .= $delegations->users1Name.", ";
+    
+    
+    $msg .= '</div><br />';
+    
+    return $msg;
+    
+    
 }
 
 

@@ -92,6 +92,58 @@ class instancesForm extends \library\baseFormBuilder
 		));
 		
 		
+		$this->form->add(new \library\webComponents\select(
+			array(
+			    "title"  => _TR_WhoCanSeeTheInstance,
+			    "name"   => "whoCanSeeTheInstance",
+			    "value"  => $this->form->getEntity()->getWhoCanSeeTheInstance(),
+			    "values" => array("allUsers" => _TR_AllUsers, "guests" => _TR_Guests, "noOne" => _TR_NoOne),
+			    "blank"  => false,
+			    )
+		));
+		
+		
+		$this->form->add(new \library\webComponents\select(
+			array(
+			    "title"  => _TR_WhoCanVote,
+			    "name"   => "whoCanVote",
+			    "value"  => $this->form->getEntity()->getWhoCanVote(),
+			    "values" => array("allUsers" => _TR_AllUsers, "guests" => _TR_Guests, "noOne" => _TR_NoOne),
+			    "blank"  => false,
+			    )
+		));
+
+		$this->form->add(new \library\webComponents\select(
+		    array(
+		        "title"  => _TR_WhoCanWriteVote,
+		        "name"   => "whoCanWriteVote",
+		        "value"  => $this->form->getEntity()->getWhoCanWriteVote(),
+		        "values" => array("allUsers" => _TR_AllUsers, "guests" => _TR_Guests, "noOne" => _TR_NoOne),
+			    "blank"  => false,
+			    )
+		));
+
+		$this->form->add(new \library\webComponents\select(
+		    array(
+		        "title"  => _TR_TypeOfDelegation,
+		        "name"   => "typeOfDelegation",
+		        "value"  => $this->form->getEntity()->getTypeOfDelegation(),
+		        "values" => array("delegation" => _TR_Delegation, "procuration" => _TR_Procuration),
+			    "blank"  => false,
+			    )
+		));
+		
+		$this->form->add(new \library\webComponents\pourcent(
+		    array(
+		        "title"  => _TR_QuorumRequired,
+		        "name"   => "quorumRequired",
+		        "value"  => $this->form->getEntity()->getQuorumRequired(),
+		    )
+		));
+
+		
+		
+		
 	}
 }
 

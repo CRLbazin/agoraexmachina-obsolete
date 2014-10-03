@@ -73,6 +73,9 @@ class votesController extends \library\baseController
 	*/
 	public function deleteAction(\library\httpRequest $request)
 	{
+		//define the layout
+		$this->page->setLayout('modal');
+		
 		$this->currentService->delete($request->getGET('id'));
 		$this->page->addVar('msgSuccess', _TR_elementsDeleted);
 	}
@@ -95,11 +98,22 @@ class votesController extends \library\baseController
 			if($request->getGET('vote') == "voteAgainst") {$result = -1;}
 			if($request->getGET('vote') == "voteWhite") {$result = 0;}
 			
+			//get instances informations
+			$instancesService = new \applications\modules\instances\services\instancesService();
+			$this->page->addVar('instances', $instancesService->getById($request->getGET('instances')));
+			
 			
 			//check if a user is is posted for the vote
 			if($request->getData('userDelegationVote') != "")
-				if($this->currentService->vote($request->getGET('id'), $request->getData('userDelegationVote'), $result))
-					$this->page->addVar('msgSuccess', _TR_voteConsidered);
+			    if(is_array($request->getData('userDelegationVote')))
+			    {
+			        foreach($request->getData('userDelegationVote') as $v)
+			            if($this->currentService->vote($request->getGET('id'), $v, $result))
+			                $this->page->addVar('msgSuccess', _TR_voteConsidered);
+			    }
+			    else if($this->currentService->vote($request->getGET('id'), $request->getData('userDelegationVote'), $result))
+			        $this->page->addVar('msgSuccess', _TR_voteConsidered);
+			                
 		}		
 		 else
 			$this->page->addVar('msgError', _TR_MustBeConnected);
