@@ -86,7 +86,6 @@ class delegationsManager extends \library\baseManager
 			LEFT JOIN users c
 				ON a.users2 = c.id
 		WHERE a.users1 = '".$users1."'
-		AND a.instances = '0'
 		");
 		
 	
@@ -247,13 +246,27 @@ class delegationsManager extends \library\baseManager
 					if(isset($res2[0]) && $valueUsers1 != $users2)
 					{
 						foreach($res2 as $val)
-							array_push($res, $val); 
+						{
+							array_push($res, $val);
+
+							//get delegations from categories
+							if($categories != null)
+								foreach($this->getDelegationReceiveForCategories($categories, $val) as $v)
+									array_push($res, $v);
+						} 
 						$valueUsers1 = $res2[0]->users1;
 					}
 					else
 						$valueUsers1 = null;
 				}
 			}
+			
+
+			//get delegations from categories
+			if($categories != null)
+				foreach($this->getDelegationReceiveForCategories($categories, $res[0]->users1) as $v)
+					array_push($res, $v);
+			
 		}
 		//get delegations from categories
 		if($categories != null)

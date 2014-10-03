@@ -173,8 +173,7 @@ class instancesManager extends \library\baseManager
 		    whoCanVote = :whoCanVote,
 		    whoCanWriteVote = :whoCanWriteVote,
 		    typeOfDelegation = :typeOfDelegation,
-		    quorumRequired = :quorumRequired,
-		    voteAccountingMethod = :voteAccountingMethod
+		    quorumRequired = :quorumRequired
 		    ";
 		
 		if($instances->getId() != "")
@@ -197,7 +196,6 @@ class instancesManager extends \library\baseManager
 		$req->bindValue(":whoCanWriteVote", $instances->getWhoCanWriteVote());
 		$req->bindValue(":typeOfDelegation", $instances->getTypeOfDelegation());
 		$req->bindValue(":quorumRequired", $instances->getQuorumRequired());
-		$req->bindValue(":voteAccountingMethod", $instances->getVoteAccountingMethod());
 		
 		
 		return $req->execute() ? true : false;

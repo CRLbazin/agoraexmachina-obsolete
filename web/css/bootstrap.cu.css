@@ -1118,6 +1118,8 @@
   color: #bebebe !important;
   cursor: not-allowed !important;
 }
+
+
  .shortcut.mauve {
   background-color: #16499a !important;
   color: #ffffff !important;
@@ -2811,4 +2813,15 @@ fieldset[disabled] .btn-mauve.active {
 .panel-heading
 {
 	font-weight : bold;
-}]
+}
+
+
+.no-cursor
+{
+	cursor : default !important;
+}
+
+.no-cursor:hover
+{
+	outline : 0px !important;
+}

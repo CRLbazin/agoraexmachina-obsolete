@@ -123,4 +123,5 @@ ALTER TABLE `_temp_users` RENAME `users`;
 update instances
 set whoCanSeeTheInstance = 'allUsers',
 whoCanVote = 'allUsers',
-whoCanWriteVote = 'allUsers'
+whoCanWriteVote = 'allUsers',
+deadline = '2020-01-01'

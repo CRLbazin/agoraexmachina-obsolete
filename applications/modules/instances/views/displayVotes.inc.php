@@ -18,7 +18,7 @@ if(sizeof($votes) >= 1)
 						        <a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name)?>/votes/<?php echo $vote->id?>/voteFor"> 
 						        <?php 
 						    }?>
-						    <div class="tile shalf ribbed-green fg-white"  tooltip="for"><?php echo $vote->voteFor;?>
+						    <div class="tile shalf ribbed-green fg-white <?php if(!canVote($instances)){echo "no-cursor";}?>"  tooltip="for"><?php echo $vote->voteFor;?>
 						        <?php
 						        if($vote->voteUser == 1)
 								{
@@ -43,7 +43,7 @@ if(sizeof($votes) >= 1)
     						    <a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name)?>/votes/<?php echo $vote->id?>/voteAgainst"> 
     						    <?php 
 						    }?>
-							<div class="tile shalf ribbed-red fg-white"><?php echo $vote->voteAgainst;?>
+							<div class="tile shalf ribbed-red fg-white <?php if(!canVote($instances)){echo "no-cursor";}?>"><?php echo $vote->voteAgainst;?>
 								<?php 
 								if($vote->voteUser == -1)
 								{
@@ -68,7 +68,7 @@ if(sizeof($votes) >= 1)
     						    <a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name)?>/votes/<?php echo $vote->id?>/voteWhite"> 
     						    <?php 
 						    }?>
-							<div class="tile shalf ribbed-grayLight fg-white"><?php echo $vote->voteWhite;?>
+							<div class="tile shalf ribbed-grayLight fg-white  <?php if(!canVote($instances)){echo "no-cursor";}?>"><?php echo $vote->voteWhite;?>
 								<?php 
 								if($vote->voteUser == '0')
 								{

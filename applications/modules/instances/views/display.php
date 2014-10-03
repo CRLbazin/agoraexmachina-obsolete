@@ -136,6 +136,8 @@
                 {
                     ?><a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name)	 ?>/votes/add" class="btn btn-primary"><span class="glyphicon glyphicon glyphicon-envelope"></span> <?php echo _TR_AddVotes ?></a><?php 
                 }
+                else
+                	echo _TR_NoAction;
                 ?>
             </div>
                 
@@ -147,7 +149,16 @@
             
             <!--  users action tab -->
             <div id="usersActions" style="display:none;">
-            	<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name)	 ?>/users/add" class="btn btn-primary "><span class="glyphicon glyphicon-user"></span> <?php echo _TR_AddUsers ?></a>
+            	<?php
+           		if(($instances->users == $_SESSION['users']->id or $_SESSION['users']->level >= 8) and ($instances->whoCanSeeTheInstance == "guests" or $instances->whoCanVote == "guests" or $instances->whoCanWriteVote == "guests"))
+            	{
+            		?>
+            		<a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>-<?php echo url($instances->name)	 ?>/users/add" class="btn btn-primary "><span class="glyphicon glyphicon-user"></span> <?php echo _TR_AddUsers ?></a>
+            		<?php 
+            	}
+            	else
+            		echo _TR_NoAction;
+            	?>
             </div>
             <br />
 			<?php

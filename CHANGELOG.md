@@ -10,7 +10,7 @@ V0.9 #Narval Unicorne
 * Ajout du système de comptabilisation des votes
 * Ajout d'un onglet "Synthèse" pour les ateliers terminés
 * Ajout de dates de fin de validité des ateliers
-* Ajout de fonctionnalités pour la délégation (mode délégation ou procuration) 
+* Ajout de mode pour les votes (mode délégation ou procuration) 
 * Mise à jour de l'ordre des onglets dans la fiche atelier "Contenu", "Forums" et "Propositions"
 * Mise à jour de la fiche atelier, renommage de l'onglet "Contenu" par "Description"
 * Mise à jour de la fiche atelier, renommage de l'onglet "Forum" par "Discussion"
