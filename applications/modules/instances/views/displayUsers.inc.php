@@ -6,8 +6,15 @@
 	<th style="width:20px;"></th>
 	<th style="width:20px;"></th>
 	<th style="width : 80%;"><?php echo _TR_Name?></th>
-	<th><?php echo _TR_Edit;?></th>
-	<th><?php echo _TR_Delete ?></th>
+	<?php
+    if(isset($_SESSION['users']))
+    if ($_SESSION['users']->id == $instances->users || $_SESSION['users']->level == 8)
+    {
+    	?>
+    	<th><?php echo _TR_Edit;?></th>
+    	<th><?php echo _TR_Delete ?></th>
+    	<?php 
+    }?>
 </tr>
 </thead>
 <tbody>
@@ -18,7 +25,8 @@
     <td><?php if($instances->whoCanWriteVote== "allUsers"){echo "<span class='glyphicon glyphicon-pencil' title='"._TR_CanWriteVote."'></span>";}else{echo "<span class='glyphicon glyphicon-pencil fg-grayLighter' title='"._TR_CantWriteVote."'></span>";}?></td>
     <td><?php echo _TR_AllUsers;?></td>
     <?php
-    if(isset($_SESSION['users']) && $_SESSION['users']->id == $instances->users || $_SESSION['users']->level == 8)
+    if(isset($_SESSION['users']))
+    if ($_SESSION['users']->id == $instances->users || $_SESSION['users']->level == 8)
     {
     	?>
     	<td><a data-toggle="modal" data-target="#myModal" href="<?php echo WEBSITE_ROOT ."/". $categories->id ."-". url($categories->name)?>/instances/<?php echo $instances->id ?>/edit"><span class="glyphicon glyphicon-edit"></span></a></td>

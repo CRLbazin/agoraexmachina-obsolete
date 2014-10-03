@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 10 Juillet 2014 à 22:51
+-- Généré le :  Ven 03 Octobre 2014 à 17:32
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -29,8 +29,11 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `sizeW` varchar(50) NOT NULL,
+  `sizeH` varchar(50) NOT NULL,
+  `color` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -46,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `delegations` (
   `instances` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=FIXED AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
 
@@ -61,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `forums` (
   `title` varchar(255) NOT NULL,
   `creationdate` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -77,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `forumsanswers` (
   `creationdate` datetime NOT NULL,
   `descr` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 -- --------------------------------------------------------
 
@@ -90,11 +93,34 @@ CREATE TABLE IF NOT EXISTS `instances` (
   `name` varchar(255) NOT NULL,
   `descr` text NOT NULL,
   `image` varchar(255) NOT NULL,
-  `deadline` varchar(50) NOT NULL,
+  `deadline` date NOT NULL,
   `users` int(11) DEFAULT NULL,
   `categories` int(11) NOT NULL,
+  `whoCanSeeTheInstance` varchar(255) NOT NULL,
+  `whoCanVote` varchar(255) NOT NULL,
+  `whoCanWriteVote` varchar(255) NOT NULL,
+  `typeOfDelegation` varchar(255) NOT NULL,
+  `quorumRequired` varchar(255) NOT NULL,
+  `voteAccountingMethod` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `instancesusers`
+--
+
+CREATE TABLE IF NOT EXISTS `instancesusers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `whoCanSeeTheInstance` tinyint(1) NOT NULL,
+  `whoCanVote` tinyint(1) NOT NULL,
+  `whoCanWriteVote` tinyint(1) NOT NULL,
+  `instances` int(11) NOT NULL,
+  `users` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=FIXED AUTO_INCREMENT=17 ;
 
 -- --------------------------------------------------------
 
@@ -109,16 +135,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `active` int(11) NOT NULL,
   `level` int(11) NOT NULL,
-  `creationDate` varchar(255) NOT NULL,
+  `creationDate` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+-- --------------------------------------------------------
 
 --
--- Contenu de la table `users`
+-- Structure de la table `version`
 --
 
-INSERT INTO `users` (`id`, `name`, `password`, `email`, `active`, `level`, `creationDate`) VALUES
-(1, 'admin', 'admin', 'admin@admin.net', 1, 1, '');
+CREATE TABLE IF NOT EXISTS `version` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -133,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `votes` (
   `name` varchar(255) NOT NULL,
   `descr` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 -- --------------------------------------------------------
 
@@ -147,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `votesusers` (
   `users` int(11) NOT NULL,
   `values` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
