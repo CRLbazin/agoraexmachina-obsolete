@@ -21,7 +21,7 @@ class instancesController extends \library\baseController
 	public function __construct(\library\application $application, $module, $action)
 	{
 		parent::__construct($application, $module, $action);
-		require('functions\functions.php');
+		require('functions/functions.php');
 		
 		//delegations
 		$delegationsCategories = array();
