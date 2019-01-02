@@ -5,7 +5,7 @@ Présentation générale
 ------------------------
 AGORA EX MACHINA (AEM) est une plateforme WEB de démocratie liquide s'inspirant initialement de la solution allemande Adhocracy.
 
-L'outil permet de créer des `ateliers de discussion` organisés par `thèmes`, où chaque membre peut participer aux discussions et aux `votes` des propositions.
+L'outil permet de créer des `ateliers de discussion` organisés par `thème`. Chaque membre peut participer aux `discussions` et `voter` des `propositions`.
 
 Les propositions ayant recueillies le plus de votes sont validées à l'issu de l'atelier.
 
