@@ -16,6 +16,9 @@ local.properties
 .settings/
 .loadpath
 
+# for git
+/web/css
+
 # External tool builders
 .externalToolBuilders/
 
